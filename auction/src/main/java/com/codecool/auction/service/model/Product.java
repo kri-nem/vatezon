@@ -3,6 +3,7 @@ package com.codecool.auction.service.model;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,6 +26,38 @@ public class Product {
         this.uploader = uploader;
         this.buyer = Optional.empty();
         this.productType = productType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public User getUploader() {
+        return uploader;
+    }
+
+    public Optional<User> getBuyer() {
+        return buyer;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public List<String> getUrlStrings() {
+        return pictures.stream().map(URL::toString).toList();
+    }
+
+    public boolean hasId(int id) {
+        return this.id == id;
     }
 
     @Override
