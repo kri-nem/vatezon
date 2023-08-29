@@ -4,26 +4,26 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Product {
-    private static int nextId = 1;
     private int id;
     private String name;
     private String description;
     private BigDecimal price;
     private Collection<URL> pictures;
     private User uploader;
-    private User buyer;
+    private Optional<User> buyer;
     private ProductType productType;
 
-    public Product(String name, String description, BigDecimal price, Collection<URL> pictures, User uploader, User buyer, ProductType productType) {
-        this.id = nextId++;
+    public Product(int id, String name, String description, BigDecimal price, Collection<URL> pictures, User uploader, ProductType productType) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.pictures = pictures;
         this.uploader = uploader;
-        this.buyer = buyer;
+        this.buyer = Optional.empty();
         this.productType = productType;
     }
 
