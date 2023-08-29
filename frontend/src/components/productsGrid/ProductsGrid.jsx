@@ -4,7 +4,7 @@ export default function GetGridViewProducts() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch('/api/products/all')
+        fetch('/api/products/all-grid')
             .then(res => res.json())
             .then((data) => {
                 setProducts(data)

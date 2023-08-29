@@ -19,7 +19,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-grid")
     public Collection<ProductGridViewDTO> getAllProducts() {
         return productService.getAllProducts();
     }
