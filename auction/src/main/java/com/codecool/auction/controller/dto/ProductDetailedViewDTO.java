@@ -12,7 +12,7 @@ public record ProductDetailedViewDTO(String name, String description, String pri
         product.getName(),
         product.getDescription(),
         product.getPrice().toString(),
-        product.getPictureUrl(),
+        product.getPictureURL(),
         product.getProductType().getText(),
         product.getUploader().getUserName(),
         product.getBuyer().isPresent() ? product.getBuyer().get().getUserName() : "");
