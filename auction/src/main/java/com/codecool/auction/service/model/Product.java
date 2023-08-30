@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 public class Product {
     private int id;
@@ -25,6 +26,18 @@ public class Product {
         this.uploader = uploader;
         this.buyer = Optional.empty();
         this.productType = productType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public URL getFirstPictures() {
+        return pictures.iterator().next();
     }
 
     @Override
