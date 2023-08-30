@@ -7,5 +7,8 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Collection;
 
-public record NewProductDTO (String name, String description, BigDecimal price, Collection<URL> pictures,
-                             User uploader, ProductType productType) {}
+public record NewProductDTO (String name,
+                             String description,
+                             String price,
+                             String pictureURL,
+                             String productType) {}
