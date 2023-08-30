@@ -7,15 +7,12 @@ import com.codecool.auction.service.model.User;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.net.URL;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
     private static int nextId = 1;
-    private Collection<Product> products;
+    private Collection<Product> products = PRODUCTS;
 
     public ProductService() {
         this.products = new HashSet<>();
@@ -23,14 +20,17 @@ public class ProductService {
 
     public Product addNewProduct(int id, String name, String description, BigDecimal price, Collection<URL> pictures,
                                  User uploader, ProductType productType) {
-        Product product = new Product(nextId++, name, description, price, pictures, uploader, productType);
+        Product product = new Product(nextId++, name, description, price, pictureUrl, uploader, productType);
         products.add(product);
         return product;
     }
 
-    public Optional<ProductDetailedViewDTO> getProductDetailedViewDTO(int id) {
-        return products.stream()
-                .filter(p -> p.hasId(id)).findFirst()
-                .map(ProductDetailedViewDTO::new);
+    public ProductDetailedViewDTO getProductDetailedViewDTO(String id) {
+        Optional<Product> product = products.stream()
+                .filter(p -> p.hasId(id)).findFirst();
+        if (product.isPresent()) {
+            return product.map(ProductDetailedViewDTO::new).get();
+        }
+        return null;
     }
 }
