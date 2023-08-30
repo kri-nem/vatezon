@@ -1,6 +1,7 @@
 import NewProductForm from "../components/NewProductForm";
 import Loading from '../components/Loading';
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 
 const fetchProductTypes = () => {
@@ -11,6 +12,7 @@ const fetchProductTypes = () => {
 const AddProduct = () => {
     const [loading, setLoading] = useState(true);
     const [productTypes, setProductTypes] = useState([]);
+    const navigate = useNavigate();
     
     useEffect(() => {
         fetchProductTypes().then(productTypes => {
@@ -25,7 +27,7 @@ const AddProduct = () => {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(product),
-        }).then((res) => res.json());
+        }).then((res) => res.json()).then(navigate("/"));
     };
         
     if(loading){
