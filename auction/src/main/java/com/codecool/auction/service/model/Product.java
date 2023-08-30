@@ -1,43 +1,31 @@
 package com.codecool.auction.service.model;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
+@Getter
+@Setter
 public class Product {
     private int id;
     private String name;
     private String description;
     private BigDecimal price;
-    private Collection<URL> pictures;
+    private String pictureURL;
     private User uploader;
     private Optional<User> buyer;
     private ProductType productType;
 
-    public Product(int id, String name, String description, BigDecimal price, Collection<URL> pictures, User uploader, ProductType productType) {
+    public Product(int id, String name, String description, BigDecimal price, String pictureURL, User uploader, ProductType productType) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.pictures = pictures;
+        this.pictureURL = pictureURL;
         this.uploader = uploader;
         this.buyer = Optional.empty();
         this.productType = productType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public URL getFirstPictures() {
-        return pictures.iterator().next();
     }
 
     @Override
@@ -51,5 +39,19 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", pictureURL='" + pictureURL + '\'' +
+                ", uploader=" + uploader +
+                ", buyer=" + buyer +
+                ", productType=" + productType +
+                '}';
     }
 }

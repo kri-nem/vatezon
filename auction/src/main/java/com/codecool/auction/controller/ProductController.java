@@ -1,12 +1,11 @@
 package com.codecool.auction.controller;
-
+import com.codecool.auction.controller.dto.NewProductDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
 import com.codecool.auction.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.codecool.auction.service.model.Product;
+import com.codecool.auction.service.model.ProductType;
+import org.springframework.web.bind.annotation.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +16,16 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @PostMapping()
+    public @ResponseBody Product addNewProduct (@RequestBody NewProductDTO newProduct) {
+        return productService.addNewProduct(newProduct);
+    }
+
+    @GetMapping("types")
+    public List<String> getProductTypes () {
+        return Arrays.stream(ProductType.values()).map(ProductType::getText).toList();
     }
 
     @GetMapping("/all-grid")
