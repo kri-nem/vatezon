@@ -20,9 +20,9 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("new")
-    public Product addNewProduct (@RequestBody NewProductDTO newProduct) {
-       return productService.addNewProduct(newProduct);
+    @PostMapping()
+    public @ResponseBody Product addNewProduct (@RequestBody NewProductDTO newProduct) {
+        return productService.addNewProduct(newProduct);
     }
 
     @GetMapping("types")
