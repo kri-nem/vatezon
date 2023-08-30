@@ -9,6 +9,7 @@ import Layout from "./pages/Layout";
 import HelloMessage from "./pages/HelloMessage";
 import AddProduct from "./pages/AddProduct";
 import Products from "./pages/Products";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/hello",
         element: <HelloMessage />,
+      },
+      {
+        path: "/home-page",
+        element: <HomePage/>,
       },
       {
         path: "/products",
