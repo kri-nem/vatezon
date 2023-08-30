@@ -29,9 +29,21 @@ public class ProductController {
     }
 
     @GetMapping("/all-grid")
-    public Collection<ProductGridViewDTO> getAllProducts() {
+    public List<ProductGridViewDTO> getAllProducts() {
         return productService.getAllProducts();
     }
+
+    @GetMapping("/{name}")
+    public Collection<ProductGridViewDTO> getProductsByName (@PathVariable String name) {
+        return productService.getProductsByName(name);
+    }
+
+    //just for postman testing
+    @PostMapping("/add")
+    public Product addProducts (@RequestBody ProductGridViewDTO product) {
+        return productService.addProduct(product);
+    }
+
 
 
 }
