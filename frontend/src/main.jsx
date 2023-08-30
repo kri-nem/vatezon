@@ -8,7 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Layout from "./pages/Layout";
 import HelloMessage from "./pages/HelloMessage";
 import AddProduct from "./pages/AddProduct";
-import ProductsGrid from "./components/ProductsGrid";
+import Products from "./pages/Products";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <ProductsGrid/>,
+        element: <Products/>,
       },
       {
         path: "/addProduct",
