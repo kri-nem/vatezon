@@ -12,17 +12,17 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
-    private Collection<URL> pictures;
+    private String pictureUrl;
     private User uploader;
     private Optional<User> buyer;
     private ProductType productType;
 
-    public Product(int id, String name, String description, BigDecimal price, Collection<URL> pictures, User uploader, ProductType productType) {
+    public Product(int id, String name, String description, BigDecimal price, String pictureUrl, User uploader, ProductType productType) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.pictures = pictures;
+        this.pictureUrl = pictureUrl;
         this.uploader = uploader;
         this.buyer = Optional.empty();
         this.productType = productType;
@@ -52,12 +52,12 @@ public class Product {
         return productType;
     }
 
-    public List<String> getUrlStrings() {
-        return pictures.stream().map(URL::toString).toList();
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public boolean hasId(int id) {
-        return this.id == id;
+    public boolean hasId(String id) {
+        return String.valueOf(this.id).equals(id);
     }
 
     @Override
