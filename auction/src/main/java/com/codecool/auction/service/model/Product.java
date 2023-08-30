@@ -28,10 +28,6 @@ public class Product {
         this.productType = productType;
     }
 
-    public String getFirstPictures() {
-        return pictureURL;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
