@@ -19,7 +19,7 @@ const AddProduct = () => {
         }, [])
         
     const addNewProduct = (product) => {
-        return fetch(`/api/products/new`, {
+        return fetch(`/api/products`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
