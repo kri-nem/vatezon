@@ -14,4 +14,8 @@ public enum ProductType {
     public String getText() {
         return text;
     }
+
+    public boolean hasSameText (String text) {
+        return this.text.equals(text);
+    }
 }
