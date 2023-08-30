@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 
-export default function GetGridViewProducts() {
+export default function ProductsGrid() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {

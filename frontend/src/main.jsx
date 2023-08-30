@@ -8,6 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Layout from "./pages/Layout";
 import HelloMessage from "./pages/HelloMessage";
 import AddProduct from "./pages/AddProduct";
+import ProductsGrid from "./components/ProductsGrid";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/hello",
         element: <HelloMessage />,
+      },
+      {
+        path: "/products",
+        element: <ProductsGrid/>,
       },
       {
         path: "/addProduct",
