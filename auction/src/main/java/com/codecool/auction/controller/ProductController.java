@@ -7,10 +7,12 @@ import com.codecool.auction.service.ProductService;
 import com.codecool.auction.service.model.Product;
 import com.codecool.auction.service.model.ProductType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.tags.form.SelectTag;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/products")
@@ -41,7 +43,12 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/category/{category}")
+    public List<ProductGridViewDTO> categorizeProductsBasedOnFilter (@PathVariable String category) {
+        return productService.getProductsByCategory(category.toUpperCase());
+    }
+
+    @GetMapping("/name/{name}")
     public Collection<ProductGridViewDTO> getProductsByName (@PathVariable String name) {
         return productService.getProductsByName(name);
     }
@@ -51,7 +58,5 @@ public class ProductController {
     public Product addProducts (@RequestBody ProductGridViewDTO product) {
         return productService.addProduct(product);
     }
-
-
 
 }
