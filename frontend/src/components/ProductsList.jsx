@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function ProductsGrid({ products, chooseFilter, filter, chooseCategory }) {
+export default function ProductsGrid({products, onNameFilterChange}) {
     return (
         <div key={"asd"}>
             <Box key="outer-div-key" sx={{ minWidth: 120 }}>

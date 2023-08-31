@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import ProductList from "../components/ProductsGrid"
-
+import ProductList from "../components/ProductsList"
 
 const Products = () => {
     const [products, setProducts] = useState([])
