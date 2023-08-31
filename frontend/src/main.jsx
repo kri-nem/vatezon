@@ -8,6 +8,12 @@ import AddProduct from "./pages/AddProduct";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
 import ProductDetails from "./components/ProductDetails";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import CssBaseline from '@mui/material/CssBaseline';
+
 
 const router = createBrowserRouter([
   {
@@ -42,6 +48,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <CssBaseline />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
