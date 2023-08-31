@@ -25,18 +25,18 @@ public class ProductService {
   }
 
   public List<ProductGridViewDTO> getAllProducts() {
-    return products.stream().map(product -> convertProductToGridViewDTO(product)).toList();
+    return products.stream().map(this::convertProductToGridViewDTO).toList();
   }
 
   public List<ProductGridViewDTO> getProductsByName(String name) {
-    return products.stream().filter(product -> product.getName().equals(name))
-            .map(product -> convertProductToGridViewDTO(product)).toList();
+    return products.stream().filter(product -> product.getName().contains(name))
+            .map(this::convertProductToGridViewDTO).toList();
   }
 
   public List<ProductGridViewDTO> getProductsByCategory (String category) {
     return products.stream()
             .filter(product -> product.getProductType().equals(ProductType.valueOf(category)))
-            .map(product -> convertProductToGridViewDTO(product))
+            .map(this::convertProductToGridViewDTO)
             .toList();
   }
 
@@ -74,12 +74,12 @@ public class ProductService {
     return new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPictureURL(), product.getId(), product.getProductType());
   }
 
-  public ProductDetailedViewDTO getProductDetailedViewDTO(String id) {
-    Optional<Product> product = products.stream()
-            .filter(p -> p.hasId(id)).findFirst();
-    if (product.isPresent()) {
-      return product.map(ProductDetailedViewDTO::new).get();
+    public ProductDetailedViewDTO getProductDetailedViewDTO(String id) {
+        Optional<Product> product = products.stream()
+                .filter(p -> p.hasId(id)).findFirst();
+        if (product.isPresent()) {
+            return product.map(ProductDetailedViewDTO::new).get();
+        }
+        return null;
     }
-    return null;
-  }
 }

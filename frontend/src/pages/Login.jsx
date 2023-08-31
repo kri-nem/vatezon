@@ -24,6 +24,8 @@ export default function Login() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: '#ffffffcc',
+            padding: '10%',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

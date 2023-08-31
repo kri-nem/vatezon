@@ -7,12 +7,10 @@ import com.codecool.auction.service.ProductService;
 import com.codecool.auction.service.model.Product;
 import com.codecool.auction.service.model.ProductType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.tags.form.SelectTag;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("api/products")
