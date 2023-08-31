@@ -8,6 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import Typography from '@mui/material/Typography'
 import {styled} from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
+import TextField from "@mui/material/TextField";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,7 +22,7 @@ const Item = styled(Paper)(({theme}) => ({
     backgroundPosition: 'center',
 }));
 
-export default function ProductsGrid({products, chooseFilter, filter, chooseCategory}) {
+export default function ProductsGrid({category, products, chooseFilter, filter, chooseCategory}) {
     return (
         <>
             <Box sx={{
@@ -30,40 +31,42 @@ export default function ProductsGrid({products, chooseFilter, filter, chooseCate
                 backgroundColor: '#ffffffcc'
             }}>
                 <Grid container spacing={5}>
-                    <Grid xs={12}>
-                        <FormControl fullWidth>
+                    <Grid xs={3}>
+                        <FormControl key={'asd'} fullWidth>
                             <InputLabel id='asd'>Filter By: </InputLabel>
                             <Select
                                 labelId='asd'
                                 id='asd'
-                                value={''}
+                                value={filter}
                                 label='filter-by'
                                 onChange={chooseFilter}
                             >
                                 <MenuItem value={"name/"}>Name</MenuItem>
                                 <MenuItem value={"category/"}>Category</MenuItem>
                             </Select>
-
-                            {filter === 'category/' ?
-                                <FormControl fullWidth>
-                                    <InputLabel id="dsa">Choose category</InputLabel>
-                                    <Select
-                                        labelId="dsa"
-                                        id="dsa"
-                                        value={""}
-                                        label="filter"
-                                        onChange={chooseCategory}
-                                    >
-                                        <MenuItem value={"road_cycling_shoes"}>Road Cycling Shoes</MenuItem>
-                                        <MenuItem value={"scarf"}>Scarf</MenuItem>
-                                        <MenuItem value={"washing_machine"}>Washing machine</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                : filter === 'name/' ? <input type="text" id="input" onChange={chooseCategory}></input> : <></>}
                         </FormControl>
                     </Grid>
+                    <Grid xs={9}>
+                        {filter === 'category/' ?
+                            <FormControl fullWidth>
+                                <InputLabel id="dsa">Choose category</InputLabel>
+                                <Select
+                                    labelId="dsa"
+                                    id="dsa"
+                                    value={category}
+                                    label="filter"
+                                    onChange={chooseCategory}
+                                >
+                                    <MenuItem value={"road_cycling_shoes"}>Road Cycling Shoes</MenuItem>
+                                    <MenuItem value={"scarf"}>Scarf</MenuItem>
+                                    <MenuItem value={"washing_machine"}>Washing machine</MenuItem>
+                                </Select>
+                            </FormControl>
+                            : filter === 'name/' ? <TextField fullWidth type="text" id="input"
+                                                              onChange={chooseCategory}></TextField> : <></>}
+                    </Grid>
 
-                    {products.map((product) => (
+                    {products && products.map((product) => (
                         <Grid key={product.id} xs={4} md={3}>
                             <Item sx={{
                                 backgroundImage: `url(${product.pictureURL})`,

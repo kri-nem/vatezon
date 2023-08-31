@@ -4,6 +4,7 @@ import ProductList from "../components/ProductsList"
 const Products = () => {
     const [products, setProducts] = useState([])
     const [filter, setFilter] = useState('name/')
+    const [category, setCategory] = useState("")
 
     useEffect(() => {
         fetch(`/api/products/`)
@@ -21,6 +22,7 @@ const Products = () => {
 
     const chooseCategory = (e) => {
         if (filter !== '' && e.target.value !== '') {
+            setCategory(e.target.value)
             let path = `api/products/${filter + e.target.value}`
             fetch(path)
                 .then(res => res.json())
@@ -40,7 +42,7 @@ const Products = () => {
     }
 
     return (
-        <ProductList products={products} chooseFilter={chooseFilter} filter={filter} chooseCategory={chooseCategory} />
+        <ProductList category={category} products={products} chooseFilter={chooseFilter} filter={filter} chooseCategory={chooseCategory} />
     )
 }
 

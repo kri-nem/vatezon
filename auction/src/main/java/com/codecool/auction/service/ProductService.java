@@ -29,7 +29,7 @@ public class ProductService {
   }
 
   public List<ProductGridViewDTO> getProductsByName(String name) {
-    return products.stream().filter(product -> product.getName().equals(name))
+    return products.stream().filter(product -> product.getName().contains(name))
             .map(this::convertProductToGridViewDTO).toList();
   }
 
