@@ -31,40 +31,44 @@ export default function ProductsGrid({category, products, chooseFilter, filter, 
                 backgroundColor: '#ffffffcc'
             }}>
                 <Grid container spacing={5}>
-                    <Grid xs={3}>
-                        <FormControl key={'asd'} fullWidth>
-                            <InputLabel id='asd'>Filter By: </InputLabel>
-                            <Select
-                                labelId='asd'
-                                id='asd'
-                                value={filter}
-                                label='filter-by'
-                                onChange={chooseFilter}
-                            >
-                                <MenuItem value={"name/"}>Name</MenuItem>
-                                <MenuItem value={"category/"}>Category</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid xs={9}>
-                        {filter === 'category/' ?
-                            <FormControl fullWidth>
-                                <InputLabel id="dsa">Choose category</InputLabel>
+                        <Grid xs={3} sx={{
+                            backgroundColor: '#ffffffcc'
+                        }}>
+                            <FormControl key={'asd'} fullWidth >
+                                <InputLabel id='asd'>Filter By: </InputLabel>
                                 <Select
-                                    labelId="dsa"
-                                    id="dsa"
-                                    value={category}
-                                    label="filter"
-                                    onChange={chooseCategory}
+                                    labelId='asd'
+                                    id='asd'
+                                    value={filter}
+                                    label='filter-by'
+                                    onChange={chooseFilter}
                                 >
-                                    <MenuItem value={"road_cycling_shoes"}>Road Cycling Shoes</MenuItem>
-                                    <MenuItem value={"scarf"}>Scarf</MenuItem>
-                                    <MenuItem value={"washing_machine"}>Washing machine</MenuItem>
+                                    <MenuItem value={"name/"}>Name</MenuItem>
+                                    <MenuItem value={"category/"}>Category</MenuItem>
                                 </Select>
                             </FormControl>
-                            : filter === 'name/' ? <TextField fullWidth type="text" id="input"
-                                                              onChange={chooseCategory}></TextField> : <></>}
-                    </Grid>
+                        </Grid>
+                        <Grid xs={9} sx={{
+                            backgroundColor: '#ffffffcc'
+                        }}>
+                            {filter === 'category/' ?
+                                <FormControl fullWidth>
+                                    <InputLabel id="dsa">Choose category</InputLabel>
+                                    <Select
+                                        labelId="dsa"
+                                        id="dsa"
+                                        value={category}
+                                        label="filter"
+                                        onChange={chooseCategory}
+                                    >
+                                        <MenuItem value={"road_cycling_shoes"}>Road Cycling Shoes</MenuItem>
+                                        <MenuItem value={"scarf"}>Scarf</MenuItem>
+                                        <MenuItem value={"washing_machine"}>Washing machine</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                : filter === 'name/' ? <TextField fullWidth type="text" id="input"
+                                                                  onChange={chooseCategory}></TextField> : <></>}
+                        </Grid>
 
                     {products && products.map((product) => (
                         <Grid key={product.id} xs={4} md={3}>
@@ -72,26 +76,30 @@ export default function ProductsGrid({category, products, chooseFilter, filter, 
                                 backgroundImage: `url(${product.pictureURL})`,
                             }}>
                                 <Link to={`/product/${product.id}`}>
-                                    <Typography
-                                        variant="h6"
-                                        component="div"
-                                        sx={{
-                                            fontWeight: 700,
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        {product.name}
-                                    </Typography>
-                                    <Typography
-                                        variant="h6"
-                                        component="div"
-                                        sx={{
-                                            fontWeight: 700,
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        {product.price}
-                                    </Typography>
+                                    <Box sx={{
+                                        backgroundColor: '#ffffffcc'
+                                    }}>
+                                        <Typography
+                                            variant="h6"
+                                            component="div"
+                                            sx={{
+                                                fontWeight: 700,
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            {product.name}
+                                        </Typography>
+                                        <Typography
+                                            variant="h6"
+                                            component="div"
+                                            sx={{
+                                                fontWeight: 700,
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            Price: {product.price}
+                                        </Typography></Box>
+
                                 </Link>
                             </Item>
                         </Grid>
