@@ -1,5 +1,8 @@
-import { Outlet} from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import ResponsiveAppBar from "../components/ResponiseveAppBar";
+import frontPictur from "../assets/vatezon.png"
+import { Box } from '@mui/material';
+
 
 const Layout = () => {
 
@@ -7,12 +10,19 @@ const Layout = () => {
 
   return (
     <div className="Layout">
-      <nav>
-        <h1>Jófogás</h1>
-        <Link to="/login">
-            <button type="button">Login</button>
-        </Link>
-      </nav>
+      <ResponsiveAppBar />
+      <Box
+        component="div"
+        sx={{
+          position: 'fixed',
+          width: '100%',
+          height: '100%',
+          backgroundImage: `url(${frontPictur})`,
+          backgroundPosition: 'right',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
       <Outlet />
     </div>
   )
