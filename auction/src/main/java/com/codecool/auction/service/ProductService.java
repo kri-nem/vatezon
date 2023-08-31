@@ -61,7 +61,7 @@ public class ProductService {
   }
 
     private ProductGridViewDTO convertProductToGridViewDTO (Product product) {
-        return new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPictureURL(), product.getId());
+        return new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPictureURL(), product.getId(), product.getProductType());
     }
 
     public ProductDetailedViewDTO getProductDetailedViewDTO(String id) {
