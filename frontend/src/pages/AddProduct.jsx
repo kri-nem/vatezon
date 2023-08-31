@@ -27,7 +27,7 @@ const AddProduct = () => {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(product),
-        }).then((res) => res.json()).then(navigate("/"));
+        }).then((res) => res.json()).then(navigate("/products"));
     };
         
     if(loading){
