@@ -1,14 +1,14 @@
 package com.codecool.auction.service;
+
 import com.codecool.auction.controller.dto.NewProductDTO;
+import com.codecool.auction.controller.dto.ProductDetailedViewDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
 import com.codecool.auction.service.model.Product;
 import com.codecool.auction.service.model.ProductType;
 import com.codecool.auction.service.model.User;
 import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
 public class ProductService {
     private static final User THE_USER = new User("user1");
     private static int nextId = 1;
-    private final Collection<Product> products;
+    private final List<Product> products;
 
     public ProductService() {
-        this.products = new HashSet<>();
+        this.products = new ArrayList<>();
     }
 
-    public Product addNewProduct(String name, String description, BigDecimal price, String picture,
+    public Product addNewProduct(String name, String description, BigDecimal price, String pictureURL,
                                  User uploader, ProductType productType) {
-        Product product = new Product(nextId++, name, description, price, picture, uploader, productType);
+        Product product = new Product(nextId++, name, description, price, pictureURL, uploader, productType);
         products.add(product);
         return product;
     }
@@ -45,6 +45,15 @@ public class ProductService {
     }
 
     private ProductGridViewDTO convertProductToGridViewDTO (Product product) {
-        return new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPictureURL());
+        return new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPictureURL(), product.getId());
+    }
+
+    public ProductDetailedViewDTO getProductDetailedViewDTO(String id) {
+        Optional<Product> product = products.stream()
+                .filter(p -> p.hasId(id)).findFirst();
+        if (product.isPresent()) {
+            return product.map(ProductDetailedViewDTO::new).get();
+        }
+        return null;
     }
 }
