@@ -1,19 +1,18 @@
-import { useState } from "react"
+import { Link } from "react-router-dom"
 
-export default function ProductList({ products, onNameFilterChange }) {
-
+export default function ProductsGrid({products}) {
     return (
         <div>
             <input name="filter" onChange={(e) => onNameFilterChange(e.target.value)} />
-            <div>
-                {products.map((product) => (
-                    <>
-                        <h4>{product.name}</h4>
-                        <h4>{product.price}</h4>
-                        <h4>{product.pictureURL}</h4>
-                    </>
-                ))}
-            </div>
+            {products.map((product) => (
+                <Link key={product.id} to={`/product/${product.id}`}>
+                <div>
+                    <h4>{product.name}</h4>
+                    <h4>{product.price}</h4>
+                    <h4>{product.pictureURL}</h4>
+                </div>
+                </Link>
+            ))}
         </div>
     )
 }
