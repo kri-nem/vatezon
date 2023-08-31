@@ -7,6 +7,7 @@ import HelloMessage from "./pages/HelloMessage";
 import AddProduct from "./pages/AddProduct";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
+import ProductDetails from "./components/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
         element: <HelloMessage />,
       },
       {
-        path: "/home-page",
+        path: "/products",
         element: <Products/>,
       },
       {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/addProduct",
         element: <AddProduct />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetails />
       }
     ],
   },

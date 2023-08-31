@@ -1,6 +1,8 @@
 package com.codecool.auction.service.model;
+
 import lombok.Getter;
 import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,6 +28,10 @@ public class Product {
         this.uploader = uploader;
         this.buyer = Optional.empty();
         this.productType = productType;
+    }
+
+    public boolean hasId(String id) {
+        return String.valueOf(this.id).equals(id);
     }
 
     @Override

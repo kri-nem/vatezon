@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react"
-import ProductsGrid from "../components/ProductsGrid"
+import ProductList from "../components/ProductsGrid"
+//import ProductsGrid from "../components/ProductsGrid"
 
 const Products = () => {
     const [products, setProducts] = useState([])
+    const [name, setName] = useState('')
 
     useEffect(() => {
-        fetch('/api/products/all-grid')
+        fetch(`/api/products/${name}`)
             .then(res => res.json())
             .then((data) => {
                 setProducts(data)
-                console.log(data)
             })
             .catch(err => console.error(err))
-    }, [])
+        }, [name])
 
     return (
-        <ProductsGrid products={products}/>
+        <ProductList products={products} onNameFilterChange={setName}/>
     )
 }
 
