@@ -1,5 +1,6 @@
 package com.codecool.auction.service;
 import com.codecool.auction.controller.dto.NewProductDTO;
+import com.codecool.auction.controller.dto.ProductDetailedViewDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
 import com.codecool.auction.service.model.Product;
 import com.codecool.auction.service.model.ProductType;
