@@ -1,9 +1,6 @@
-
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import ErrorPage from "./pages/ErrorPage";
 import Layout from "./pages/Layout";
 import HelloMessage from "./pages/HelloMessage";

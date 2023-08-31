@@ -1,9 +1,9 @@
-
 import { Link } from "react-router-dom"
 
 export default function ProductsGrid({products}) {
     return (
         <div>
+            <input name="filter" onChange={(e) => onNameFilterChange(e.target.value)} />
             {products.map((product) => (
                 <Link key={product.id} to={`/product/${product.id}`}>
                 <div>
@@ -12,7 +12,6 @@ export default function ProductsGrid({products}) {
                     <h4>{product.pictureURL}</h4>
                 </div>
                 </Link>
-                
             ))}
         </div>
     )
