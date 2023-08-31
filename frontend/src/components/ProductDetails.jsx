@@ -21,7 +21,7 @@ export default function ProductDetails() {
                         <div><span>Price</span><span>{product.price}</span></div>
                         <div><span>Type</span><span>{product.productType}</span></div>
                         <div><span>Seller</span><span>{product.uploader}</span></div>
-                        {product.buyer && <div><button>Buy</button></div>}
+                        {!product.buyer && <div><button>Buy</button></div>}
                     </span>
                 </>}
         </>
