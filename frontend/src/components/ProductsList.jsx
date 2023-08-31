@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export default function ProductsGrid({products, onNameFilterChange}) {
+export default function ProductsList({products, onNameFilterChange}) {
     return (
         <div>
             <input name="filter" onChange={(e) => onNameFilterChange(e.target.value)} />
