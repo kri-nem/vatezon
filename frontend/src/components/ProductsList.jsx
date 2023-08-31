@@ -1,64 +1,58 @@
 import { Link } from "react-router-dom"
-import Grid from '@mui/material/Unstable_Grid2'
-import Typography from '@mui/material/Typography'
-import { styled } from '@mui/material/styles'
-import Paper from '@mui/material/Paper'
-import { Box } from '@mui/material'
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    height: '400px',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-}));
-
-export default function ProductsList({ products, onNameFilterChange }) {
+export default function ProductsGrid({products, onNameFilterChange}) {
     return (
-        <div>
-            <input name="filter" onChange={(e) => onNameFilterChange(e.target.value)} />
-            <Box sx={{ 
-                margin: '0% 3% 0% 3%',
-                padding: '5% 3% 0% 3%',
-                backgroundColor: '#ffffffcc'
-             }}>
-                <Grid container spacing={5}>
-                    {products.map((product) => (
-                        <Grid key={product.id} xs={4} md={3} >
-                            <Item sx={{
-                                backgroundImage: `url(${product.pictureURL})`,
-                            }}>
-                                <Link to={`/product/${product.id}`}>
-                                    <Typography
-                                        variant="h6"
-                                        component="div"
-                                        sx={{
-                                            fontWeight: 700,
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        {product.name}
-                                    </Typography>
-                                    <Typography
-                                        variant="h6"
-                                        component="div"
-                                        sx={{
-                                            fontWeight: 700,
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        {product.price}
-                                    </Typography>
-                                </Link>
-                            </Item>
-                        </Grid>
-                    ))}
-                </Grid>
+        <div key={"asd"}>
+            <Box key="outer-div-key" sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                    <InputLabel id='asd'>Filter By: </InputLabel>
+                    <Select
+                        labelId='asd'
+                        id='asd'
+                        value={''}
+                        label='filter-by'
+                        onChange={chooseFilter}
+                    >
+                        <MenuItem value={"name/"}>Name</MenuItem>
+                        <MenuItem value={"category/"}>Category</MenuItem>
+                    </Select>
+                </FormControl>
             </Box>
-        </div >
+            <div key="inner-div-key"> {filter === 'category/' ?
+                <Box sx={{ minWidth: 40 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="dsa">Choose category</InputLabel>
+                        <Select
+                            labelId="dsa"
+                            id="dsa"
+                            value={""}
+                            label="filter"
+                            onChange={chooseCategory}
+                        >
+                            <MenuItem value={"road_cycling_shoes"}>Road Cycling Shoes</MenuItem>
+                            <MenuItem value={"scarf"}>Scarf</MenuItem>
+                            <MenuItem value={"washing_machine"}>Washing machine</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box> : filter === 'name/' ? <input type="text" id="input" onChange={chooseCategory}></input> : <></>}
+            </div>
+            <div>
+                {products.map((product) => (
+                    <Link key={product.id} to={`/product/${product.id}`}>
+                        <div>
+                            <h4>{product.name}</h4>
+                            <h4>{product.price}</h4>
+                            <h4>{product.pictureURL}</h4>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+        </div>
     )
 }
