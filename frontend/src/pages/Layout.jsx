@@ -3,14 +3,10 @@ import ResponsiveAppBar from "../components/ResponiseveAppBar";
 import frontPictur from "../assets/vatezon.png"
 import { Box } from '@mui/material';
 
-
 const Layout = () => {
-
-
-
   return (
     <div className="Layout">
-      <ResponsiveAppBar />
+      <ResponsiveAppBar/>
       <Box
         component="div"
         sx={{
@@ -20,7 +16,8 @@ const Layout = () => {
           backgroundImage: `url(${frontPictur})`,
           backgroundPosition: 'right',
           backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
+          zIndex: '-1',
         }}
       />
       <Outlet />
