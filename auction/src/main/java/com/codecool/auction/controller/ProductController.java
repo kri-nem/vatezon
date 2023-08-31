@@ -28,7 +28,7 @@ public class ProductController {
         return Arrays.stream(ProductType.values()).map(ProductType::getText).toList();
     }
 
-    @GetMapping("/all-grid")
+    @GetMapping("/")
     public List<ProductGridViewDTO> getAllProducts() {
         return productService.getAllProducts();
     }
