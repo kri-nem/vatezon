@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import {useEffect, useState} from "react"
+import {useParams} from "react-router-dom"
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Unstable_Grid2'
 
 export default function ProductDetails() {
     const [product, setProduct] = useState(null)
-    const { id } = useParams()
+    const {id} = useParams()
 
     useEffect(() => {
         fetch('/api/products/detailed/' + id)
@@ -13,17 +20,45 @@ export default function ProductDetails() {
 
     return (
         <>
-            {product && 
-                <>
-                    <span><img src={product.pictureUrl} alt="product picture" /></span><span>
-                        <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <div><span>Price</span><span>{product.price}</span></div>
-                        <div><span>Type</span><span>{product.productType}</span></div>
-                        <div><span>Seller</span><span>{product.uploader}</span></div>
-                        {!product.buyer && <div><button>Buy</button></div>}
-                    </span>
-                </>}
+            {product &&
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    style={{minHeight: '100vh',
+                        margin: '0% 3% 0% 3%',
+                        padding: '5% 3% 0% 3%',
+                        backgroundColor: '#ffffffcc'}}
+                >
+
+                    <Grid item xs={3}>
+                        <Card sx={{maxWidth: 600}}>
+                            <CardMedia
+                                sx={{height: 400}}
+                                image={product.pictureUrl}
+                                title="green iguana"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {product.name}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    {product.description}
+                                </Typography>
+                                <Typography gutterBottom variant="body1" component="div">
+                                    Seller: {product.uploader}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="large">Buy for {product.price}$</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                </Grid>
+
+            }
         </>
     )
 }
