@@ -43,7 +43,12 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/category/{category}")
+    public List<ProductGridViewDTO> categorizeProductsBasedOnFilter (@PathVariable String category) {
+        return productService.getProductsByCategory(category.toUpperCase());
+    }
+
+    @GetMapping("/name/{name}")
     public Collection<ProductGridViewDTO> getProductsByName (@PathVariable String name) {
         return productService.getProductsByName(name);
     }
@@ -53,7 +58,5 @@ public class ProductController {
     public Product addProducts (@RequestBody ProductGridViewDTO product) {
         return productService.addProduct(product);
     }
-
-
 
 }
