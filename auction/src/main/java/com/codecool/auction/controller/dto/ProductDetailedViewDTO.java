@@ -1,8 +1,6 @@
 package com.codecool.auction.controller.dto;
 
-import com.codecool.auction.service.model.Product;
-
-import java.util.List;
+import com.codecool.auction.model.Product;
 
 public record ProductDetailedViewDTO(String name, String description, String price, String pictureUrl,
                                      String productType, String uploader, String buyer) {
@@ -12,9 +10,9 @@ public record ProductDetailedViewDTO(String name, String description, String pri
         product.getName(),
         product.getDescription(),
         product.getPrice().toString(),
-        product.getPictureURL(),
+        product.getPicture(),
         product.getProductType().getText(),
         product.getUploader().getUserName(),
-        product.getBuyer().isPresent() ? product.getBuyer().get().getUserName() : "");
+        product.getBuyer() == null ? "" : product.getBuyer().getUserName());
     }
 }
