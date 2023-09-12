@@ -4,8 +4,9 @@ import com.codecool.auction.controller.dto.NewProductDTO;
 import com.codecool.auction.controller.dto.ProductDetailedViewDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
 import com.codecool.auction.service.ProductService;
-import com.codecool.auction.service.model.Product;
-import com.codecool.auction.service.model.ProductType;
+import com.codecool.auction.model.Product;
+import com.codecool.auction.model.ProductType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -17,8 +18,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(@Autowired ProductService productService) { this.productService = productService;
     }
 
     @GetMapping("detailed/{id}")

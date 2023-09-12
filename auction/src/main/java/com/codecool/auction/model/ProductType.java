@@ -1,4 +1,4 @@
-package com.codecool.auction.service.model;
+package com.codecool.auction.model;
 
 public enum ProductType {
     ROAD_CYCLING_SHOES("Road-Cycling-Shoes"),

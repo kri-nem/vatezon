@@ -1,6 +1,6 @@
 package com.codecool.auction.controller.dto;
 
-import com.codecool.auction.service.model.ProductType;
+import com.codecool.auction.model.ProductType;
 
 import java.math.BigDecimal;
 
