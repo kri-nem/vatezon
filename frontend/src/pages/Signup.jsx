@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -24,6 +25,7 @@ const addNewUser = (user) => {
 }
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState ("");
   const [lastname, setLastname] = useState ("");
@@ -40,6 +42,11 @@ export default function Signup() {
       "password": password,
     }
     addNewUser(newUser)
+    .then(res => {
+      if (res.status == 200) {
+        navigate("/products")
+      }
+    })
   }
 
   return (
