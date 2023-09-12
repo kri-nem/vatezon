@@ -9,10 +9,41 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
+const postUser = (user) => {
+  return fetch('api/users/login', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+}
+
 export default function Login() {
+  const naigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const user = {
+      "username": username,
+      "password": password,
+    }
+    postUser(user)
+    .then((res) => {
+      if (res.status == 401) {
+        console.log("Invalid username or password");
+      } else {
+        naigate("/products")
+      }
+    });
+  } 
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -34,16 +65,17 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
+              onChange={e => setUsername(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -54,6 +86,7 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={e => setPassword(e.target.value)}
             />
             <Button
               type="submit"
