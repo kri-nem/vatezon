@@ -9,10 +9,38 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
 
 const defaultTheme = createTheme();
 
+const addNewUser = (user) => {
+  return fetch('api/users/signup', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+}
+
 export default function Signup() {
+  const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState ("");
+  const [lastname, setLastname] = useState ("");
+  const [password, setPassword] = useState ("");
+  const [email, setEmail] = useState ("");
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const newUser = {
+      "username": username,
+      "firstname": firstname,
+      "lastname": lastname,
+      "email": email,
+      "password": password,
+    }
+    addNewUser(newUser)
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -34,7 +62,7 @@ export default function Signup() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSignup} noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -45,6 +73,7 @@ export default function Signup() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={e => setFirstname(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -55,6 +84,18 @@ export default function Signup() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={e => setLastname(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  onChange={e => setUsername(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -65,6 +106,7 @@ export default function Signup() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={e => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -76,6 +118,7 @@ export default function Signup() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={e => setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
