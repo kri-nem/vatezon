@@ -18,8 +18,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     Long id;
+    @Column(unique = true)
     String userName;
+    String firstName;
+    String lastName;
     String password;
+    String email;
     @OneToMany(mappedBy = "uploader")
     Set<Product> productsToSell;
     @OneToMany(mappedBy = "buyer")
