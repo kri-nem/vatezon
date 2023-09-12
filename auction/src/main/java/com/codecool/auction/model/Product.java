@@ -1,34 +1,34 @@
-package com.codecool.auction.service.model;
+package com.codecool.auction.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Optional;
 
+@Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
-    private int id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private String pictureURL;
-    private User uploader;
-    private Optional<User> buyer;
-    private ProductType productType;
-
-    public Product(int id, String name, String description, BigDecimal price, String pictureURL, User uploader, ProductType productType) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.pictureURL = pictureURL;
-        this.uploader = uploader;
-        this.buyer = Optional.empty();
-        this.productType = productType;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String name;
+    String description;
+    BigDecimal price;
+    String picture;
+    @ManyToOne
+    @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
+    User uploader;
+    @ManyToOne
+    @JoinColumn(name = "buyer_id", referencedColumnName = "user_id")
+    User buyer;
+    @Enumerated(EnumType.STRING)
+    ProductType productType;
 
     public boolean hasId(String id) {
         return String.valueOf(this.id).equals(id);
@@ -39,7 +39,7 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id;
+        return Objects.equals(id, product.id);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", pictureURL='" + pictureURL + '\'' +
+                ", pictureURL='" + picture + '\'' +
                 ", uploader=" + uploader +
                 ", buyer=" + buyer +
                 ", productType=" + productType +
