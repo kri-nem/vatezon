@@ -26,11 +26,19 @@ const postUser = (user) => {
   })
 }
 
-const notify = (boolean) => {
-  if (boolean) {
-    toast("Successful login")
+const checkAllRequiredFields = (username, password) => {
+  if (username === "" || password === "") {
+    return false;
   } else {
-    toast.error('Invalid username or password', {
+    return true;
+  }
+}
+
+const notify = (boolean, message) => {
+  if (boolean) {
+    toast(message)
+  } else {
+    toast.error(message, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -50,19 +58,23 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const user = {
-      "username": username,
-      "password": password,
-    }
-    postUser(user)
-    .then((res) => {
-      if (res.status == 401) {
-        notify(false);
-      } else {
-        notify(true);
-        navigate("/products");
+    if (checkAllRequiredFields(username, password)){
+      const user = {
+        "username": username,
+        "password": password,
       }
-    });
+      postUser(user)
+      .then((res) => {
+        if (res.status == 401) {
+          notify(false, "Invalid username or password!");
+        } else {
+          notify(true, "Successful login!");
+          navigate("/products");
+        }
+      });
+    } else {
+      notify(false, "Please fill all required fields!")
+    }
   } 
 
   return (
