@@ -11,6 +11,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
@@ -24,8 +26,25 @@ const postUser = (user) => {
   })
 }
 
+const notify = (boolean) => {
+  if (boolean) {
+    toast("Successful login")
+  } else {
+    toast.error('Invalid username or password', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  }
+}
+
 export default function Login() {
-  const naigate = useNavigate();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,14 +57,16 @@ export default function Login() {
     postUser(user)
     .then((res) => {
       if (res.status == 401) {
-        console.log("Invalid username or password");
+        notify(false);
       } else {
-        naigate("/products")
+        notify(true);
+        navigate("/products");
       }
     });
   } 
 
   return (
+    <>
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -112,5 +133,16 @@ export default function Login() {
         </Box>
       </Container>
     </ThemeProvider>
+    <ToastContainer position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"/>
+    </>
   );
 }
