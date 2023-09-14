@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 
 const fetchProductTypes = () => {
-    return fetch("/api/products/types").then((res) => res.json());
+    return fetch("/api/tags").then((res) => res.json());
 }
 
 async function sendData(url, formData) {
