@@ -7,17 +7,19 @@ import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @Builder.Default
+    UUID id = UUID.randomUUID();
     String name;
     String description;
     BigDecimal price;

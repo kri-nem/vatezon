@@ -1,14 +1,13 @@
 package com.codecool.auction.controller.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.codecool.auction.model.Tag;
-import com.codecool.auction.model.User;
 
 import java.util.Set;
 
 public record NewProductDTO (String name,
                              String description,
                              String price,
-                             String picture,
-                             User uploader,
-                             User buyer,
-                             Set<String> tags) {}
+                             MultipartFile picture,
+                             Set<String> tags) {};
