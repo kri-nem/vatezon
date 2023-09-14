@@ -8,6 +8,15 @@ const fetchProductTypes = () => {
     return fetch("/api/products/types").then((res) => res.json());
 }
 
+async function sendData(url, formData) {
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
+
+    return response
+}
+
 
 const AddProduct = () => {
     const [loading, setLoading] = useState(true);
@@ -21,13 +30,8 @@ const AddProduct = () => {
         }, [])
         
     const addNewProduct = (product) => {
-        return fetch(`/api/products`, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(product),
-        }).then((res) => res.json()).then(navigate("/products"));
+        sendData('/api/products/1', product)
+            .then(() => navigate('/products'))
     };
         
     if(loading){
