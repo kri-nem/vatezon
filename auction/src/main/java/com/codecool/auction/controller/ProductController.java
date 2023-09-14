@@ -3,9 +3,10 @@ package com.codecool.auction.controller;
 import com.codecool.auction.controller.dto.NewProductDTO;
 import com.codecool.auction.controller.dto.ProductDetailedViewDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
+import com.codecool.auction.model.Tag;
 import com.codecool.auction.service.ProductService;
 import com.codecool.auction.model.Product;
-import com.codecool.auction.model.ProductType;
+import com.codecool.auction.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +14,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("api/products")
 public class ProductController {
-    private final ProductService productService;
 
-    public ProductController(@Autowired ProductService productService) { this.productService = productService;
+    private final ProductService productService;
+    private final TagService tagService;
+
+    @Autowired
+    public ProductController(ProductService productService, TagService tagService) {
+        this.productService = productService;
+        this.tagService = tagService;
     }
+
 
     @GetMapping("detailed/{id}")
     public ProductDetailedViewDTO getDetailedView(@PathVariable("id") String id) {
@@ -49,12 +57,20 @@ public class ProductController {
     }
 
     @GetMapping("/category/{category}")
-    public List<ProductGridViewDTO> categorizeProductsBasedOnFilter (@PathVariable String category) {
-        return productService.getProductsByCategory(category.toUpperCase());
+    public Set<ProductGridViewDTO> categorizeProductsBasedOnFilter (@PathVariable String category) {
+        Tag tag = tagService.findTagByEndpoint(category);
+        return productService.getProductsByTag(tag);
     }
 
     @GetMapping("/name/{name}")
     public Collection<ProductGridViewDTO> getProductsByName (@PathVariable String name) {
         return productService.getProductsByName(name);
     }
+
+    //just for postman testing
+    @PostMapping("/add")
+    public Product addProducts (@RequestBody ProductGridViewDTO product) {
+        return productService.addProduct(product);
+    }
+
 }

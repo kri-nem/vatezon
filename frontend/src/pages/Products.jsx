@@ -5,6 +5,7 @@ const Products = () => {
     const [products, setProducts] = useState([])
     const [filter, setFilter] = useState('name/')
     const [category, setCategory] = useState("")
+    const [tags, setTags] = useState([])
 
     useEffect(() => {
         fetch(`/api/products/`)
@@ -13,11 +14,17 @@ const Products = () => {
             setProducts(data)
         })
         .catch(err => console.error(err))
+
+        fetch(`/api/tags`)
+        .then(res => res.json())
+        .then((data) => {
+            setTags(data)
+        })
+        .catch(err => console.error(err))
     }, [])
 
     const chooseFilter = (e) => {
         setFilter(e.target.value);
-        console.log(e.target.value);
     }
 
     const chooseCategory = (e) => {
@@ -42,7 +49,7 @@ const Products = () => {
     }
 
     return (
-        <ProductList category={category} products={products} chooseFilter={chooseFilter} filter={filter} chooseCategory={chooseCategory} />
+        <ProductList category={category} products={products} chooseFilter={chooseFilter} filter={filter} chooseCategory={chooseCategory} tagsName={tags} />
     )
 }
 

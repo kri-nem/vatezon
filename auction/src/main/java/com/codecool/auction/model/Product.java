@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,12 +29,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "user_id")
     User buyer;
-    @Enumerated(EnumType.STRING)
-    ProductType productType;
+    @ManyToMany
+    Set<Tag> tags;
 
-    public boolean hasId(String id) {
-        return String.valueOf(this.id).equals(id);
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -58,7 +56,7 @@ public class Product {
                 ", pictureURL='" + picture + '\'' +
                 ", uploader=" + uploader +
                 ", buyer=" + buyer +
-                ", productType=" + productType +
+                ", tag=" + tags +
                 '}';
     }
 }

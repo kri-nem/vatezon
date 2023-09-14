@@ -11,6 +11,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
@@ -24,28 +26,59 @@ const postUser = (user) => {
   })
 }
 
+const checkAllRequiredFields = (username, password) => {
+  if (username === "" || password === "") {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const notify = (boolean, message) => {
+  if (boolean) {
+    toast(message)
+  } else {
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  }
+}
+
 export default function Login() {
-  const naigate = useNavigate();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const user = {
-      "username": username,
-      "password": password,
-    }
-    postUser(user)
-    .then((res) => {
-      if (res.status == 401) {
-        console.log("Invalid username or password");
-      } else {
-        naigate("/products")
+    if (checkAllRequiredFields(username, password)){
+      const user = {
+        "username": username,
+        "password": password,
       }
-    });
+      postUser(user)
+      .then((res) => {
+        if (res.status == 401) {
+          notify(false, "Invalid username or password!");
+        } else {
+          notify(true, "Successful login!");
+          navigate("/products");
+        }
+      });
+    } else {
+      notify(false, "Please fill all required fields!")
+    }
   } 
 
   return (
+    <>
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -112,5 +145,16 @@ export default function Login() {
         </Box>
       </Container>
     </ThemeProvider>
+    <ToastContainer position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"/>
+    </>
   );
 }

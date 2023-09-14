@@ -8,15 +8,18 @@ import com.codecool.auction.model.Product;
 import com.codecool.auction.model.ProductType;
 import com.codecool.auction.model.User;
 import com.codecool.auction.repository.UserDAO;
+import com.codecool.auction.model.Tag;
+import com.codecool.auction.repository.TagDAO;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,37 +27,26 @@ public class ProductService {
   static final Path PICTURES_PATH = Paths.get("uploaded_pictures/").toAbsolutePath();
   final ProductDAO productDAO;
   final UserDAO userDao;
+  final TagDAO tagDAO;
 
   @Autowired
-  public ProductService(ProductDAO productDAO, UserDAO userDao) {
+  public ProductService(ProductDAO productDAO, UserDAO userDao, TagDAO tagDAO) {
     this.productDAO = productDAO;
     this.userDao = userDao;
+    this.tagDAO = tagDAO;
   }
 
   public List<ProductGridViewDTO> getAllProducts() {
-    return null; /*products.stream().map(this::convertProductToGridViewDTO).toList();*/
+    return productDAO.findAll().stream().map(this::convertProductToGridViewDTO).toList();
   }
 
   public List<ProductGridViewDTO> getProductsByName(String name) {
-    return null; /*products.stream().filter(product -> product.getName().contains(name))
-            .map(this::convertProductToGridViewDTO).toList();*/
+    return productDAO.findProductByNameContaining(name).stream().map(this::convertProductToGridViewDTO).toList();
   }
 
-  public List<ProductGridViewDTO> getProductsByCategory (String category) {
-    return null; /*products.stream()
-            .filter(product -> product.getProductType().equals(ProductType.valueOf(category)))
-            .map(this::convertProductToGridViewDTO)
-            .toList();*/
+  public Set<ProductGridViewDTO> getProductsByTag(Tag tag) {
+    return productDAO.findProductByTagsContaining(tag).stream().map(this::convertProductToGridViewDTO).collect(Collectors.toSet());
   }
-
-  public Product addNewProduct(String name, String description, BigDecimal price, String pictureURL,
-                               User uploader, ProductType productType) {
-    /*Product product = new Product(nextId++, name, description, price, pictureURL, uploader, productType);
-    products.add(product);
-    return product;*/
-    return null;
-  }
-
   public Product addNewProduct(Long userId, NewProductDTO newProduct) {
     User uploader = userDao.getUserById(userId);
     Product product = Product.builder()
@@ -68,19 +60,11 @@ public class ProductService {
 
     Long pId = product.getId();
     return product;
-    /*String name = newProduct.name();
-    String description = newProduct.description();
-    String price = newProduct.price();
-    BigDecimal product_price = new BigDecimal(price);
-    String pictureURL = newProduct.pictureURL();
-    String productType = newProduct.productType();
-    ProductType product_type = Arrays.stream(ProductType.values()).filter(e -> e.hasSameText(productType)).findFirst().orElse(null);
-    return addNewProduct(name, description, product_price, pictureURL, THE_USER, product_type);*/
-    return null;
+
   }
 
   private ProductGridViewDTO convertProductToGridViewDTO(Product product) {
-    return null; /*new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPictureURL(), product.getId(), product.getProductType());*/
+    return new ProductGridViewDTO(product.getName(), product.getPrice(), product.getPicture(), product.getId(), product.getTags());
   }
 
     public ProductDetailedViewDTO getProductDetailedViewDTO(String id) {
