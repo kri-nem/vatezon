@@ -23,7 +23,7 @@ const NewProductForm = ({productTypes, addNewProduct}) => {
         data.append("name", name)
         data.append("description", description)
         data.append("price", price)
-        data.append("productType", productType)
+        data.append("tags", JSON.stringify([productType]))
         data.append("picture", picture)
 
         console.log(data);
@@ -94,7 +94,7 @@ const NewProductForm = ({productTypes, addNewProduct}) => {
                         <label htmlFor="productType">Product type:</label>
                         <select defaultValue="Select a type!" onChange={(e) => setProductType(e.target.value)}>
                             <option disabled>Select a type!</option>
-                            {productTypes.map((o, i) => <option key={i} value={o}>{o}</option>)}
+                            {productTypes.map((o, i) => <option key={i} value={o.nAME}>{o.name}</option>)}
                         </select>
                         <hr/>
                         <Button
