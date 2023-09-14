@@ -1,7 +1,9 @@
 package com.codecool.auction.controller.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public record NewProductDTO (String name,
                              String description,
                              String price,
-                             String pictureURL,
-                             String productType) {}
+                             String productType,
+                             MultipartFile picture) {}
