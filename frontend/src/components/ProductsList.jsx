@@ -22,7 +22,7 @@ const Item = styled(Paper)(({theme}) => ({
     backgroundPosition: 'center',
 }));
 
-export default function ProductsGrid({category, products, chooseFilter, filter, chooseCategory}) {
+export default function ProductsGrid({category, products, chooseFilter, filter, chooseCategory, tagsName: tags}) {
     return (
         <>
             <Box sx={{
@@ -60,10 +60,9 @@ export default function ProductsGrid({category, products, chooseFilter, filter, 
                                         value={category}
                                         label="filter"
                                         onChange={chooseCategory}
-                                    >
-                                        <MenuItem value={"road_cycling_shoes"}>Road Cycling Shoes</MenuItem>
-                                        <MenuItem value={"scarf"}>Scarf</MenuItem>
-                                        <MenuItem value={"washing_machine"}>Washing machine</MenuItem>
+                                    >{tags && tags.map((tag) => (
+                                        <MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>
+                                        ))}
                                     </Select>
                                 </FormControl>
                                 : filter === 'name/' ? <TextField fullWidth type="text" id="input"
@@ -73,7 +72,7 @@ export default function ProductsGrid({category, products, chooseFilter, filter, 
                     {products && products.map((product) => (
                         <Grid key={product.id} xs={4} md={3}>
                             <Item sx={{
-                                backgroundImage: `url(${product.pictureURL})`,
+                                backgroundImage: `url(${product.picture})`,
                             }}>
                                 <Link to={`/product/${product.id}`}>
                                     <Box sx={{
