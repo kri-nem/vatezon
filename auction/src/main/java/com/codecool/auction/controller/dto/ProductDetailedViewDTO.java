@@ -5,7 +5,7 @@ import com.codecool.auction.model.Tag;
 
 import java.util.Set;
 
-public record ProductDetailedViewDTO(String name, String description, String price, String pictureUrl,
+public record ProductDetailedViewDTO(String name, String description, String price, String picture,
                                      Set<Tag> tags, String uploader, String buyer) {
 
     public ProductDetailedViewDTO(Product product) {
