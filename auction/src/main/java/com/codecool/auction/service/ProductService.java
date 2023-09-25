@@ -100,6 +100,7 @@ public class ProductService {
     }
 
     public ProductDetailedViewDTO getProductDetailedViewDTO(Long id) {
+        System.out.println(productDAO.findById(id));
         return productDAO.findById(id)
                 .map(ProductDetailedViewDTO::new)
                 .orElseThrow(() -> new RuntimeException("Product with requested id not found"));
