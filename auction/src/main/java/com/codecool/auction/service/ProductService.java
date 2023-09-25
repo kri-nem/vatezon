@@ -18,7 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,29 +55,23 @@ public class ProductService {
                 .collect(Collectors.toSet());
     }
 
-    public Product addNewProduct(Long userId, NewProductDTO newProduct) throws IOException {
-        Product product = buildProduct(newProduct, userId);
+    public boolean addNewProduct(Long userId, NewProductDTO newProduct) throws IOException {
+        String[] originalImageName = Objects.requireNonNull(newProduct.picture().getOriginalFilename()).split("\\.");
+        String imageExtension = originalImageName[originalImageName.length - 1];
 
-        String contentType = newProduct.picture().getContentType();
-        String extension = "";
-        if (contentType != null) {
-            extension = contentType.split("/")[contentType.split("/").length - 1];
-        }
-
-        String fileName = userId.toString() + "-" + product.getId() + "." + extension;
+        String fileName =  UUID.randomUUID() + "." + imageExtension;
         File destination = new File(System.getenv("image_folder") + fileName);
+
+        Product product = buildProduct(newProduct, userId, fileName);
 
         newProduct.picture().transferTo(destination);
 
-        product.setPicture(fileName);
-
         productDAO.save(product);
 
-        return product;
-
+        return true;
     }
 
-    private Product buildProduct(NewProductDTO newProduct, Long userId) {
+    private Product buildProduct(NewProductDTO newProduct, Long userId, String fileName) {
         User uploader = userDao.getUserById(userId);
         Set<Tag> tags = mapTagNamesToTags(newProduct);
         return Product.builder()
@@ -84,6 +80,7 @@ public class ProductService {
                 .price(new BigDecimal(newProduct.price()))
                 .uploader(uploader)
                 .tags(tags)
+                .picture(fileName)
                 .build();
     }
 
