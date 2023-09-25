@@ -18,8 +18,8 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
     @Id
-    @Builder.Default
-    UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String name;
     String description;
     BigDecimal price;
