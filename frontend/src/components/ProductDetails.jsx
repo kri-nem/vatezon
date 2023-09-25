@@ -33,11 +33,11 @@ export default function ProductDetails() {
                         backgroundColor: '#ffffffcc'}}
                 >
 
-                    <Grid item xs={3}>
+                    <Grid xs={3}>
                         <Card sx={{maxWidth: 600}}>
                             <CardMedia
                                 sx={{height: 400}}
-                                image={product.pictureUrl}
+                                image={"http://localhost:5173/api/pictures/" + product.picture}
                                 title="green iguana"
                             />
                             <CardContent>
