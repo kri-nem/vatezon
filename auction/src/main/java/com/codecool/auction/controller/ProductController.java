@@ -40,7 +40,7 @@ public class ProductController {
     @RequestMapping(
             path = "/{user-id}",
             method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public @ResponseBody Product addNewProduct (
+    public @ResponseBody boolean addNewProduct (
             @PathVariable("user-id") Long userId,
             @ModelAttribute NewProductDTO newProduct) throws IOException {
         return productService.addNewProduct(userId, newProduct);
