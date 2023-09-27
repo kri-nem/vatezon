@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +28,14 @@ public class UserService {
         this.jwtService = jwtService;
     }
 
-    public ResponseEntity<Integer> checkLoginUser (UserLoginDTO userLoginDTO) {
+    public String checkLoginUser (UserLoginDTO userLoginDTO) {
         User user = getUserByUsername(userLoginDTO.username());
 
         boolean isPasswordValid = passwordEncoder.matches(userLoginDTO.password(), user.getPassword());
         if (isPasswordValid){
-            String token = jwtService.buildToken(user.getUserName());
-            return new ResponseEntity<>(200, HttpStatus.OK);
+            return jwtService.buildToken(user.getUserName(), user.getRole());
         } else {
-            return new ResponseEntity<>(401, HttpStatus.UNAUTHORIZED);
+            throw new BadCredentialsException("Invalid password!");
         }
     }
 
