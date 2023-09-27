@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<Integer> checkUserForLogin (@RequestBody UserLoginDTO userLoginDTO){
+    public String checkUserForLogin (@RequestBody UserLoginDTO userLoginDTO){
         return userService.checkLoginUser(userLoginDTO);
     }
 
