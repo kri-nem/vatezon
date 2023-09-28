@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public String checkLoginUser (UserLoginDTO userLoginDTO) {
-        User user = getUserByUsername(userLoginDTO.username());
+        User user = findUserByUsername(userLoginDTO.username());
 
         boolean isPasswordValid = passwordEncoder.matches(userLoginDTO.password(), user.getPassword());
         if (isPasswordValid){
@@ -40,9 +40,10 @@ public class UserService {
         }
     }
 
-    public User getUserByUsername (String username) {
-        return userDAO.getUserByUserName(username);
+    private User findUserByUsername(String username) {
+        return userDAO.findByUserName(username);
     }
+
 
     public void addNewUser (UserSignUpDTO userSignUpDTO) {
         String username = userSignUpDTO.username();
