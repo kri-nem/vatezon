@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react"
 import ProductList from "../components/ProductsList"
-import {getProducts} from "../fetches.js";
-import {getTags} from "../fetches.js";
+import {getProducts, getTags, getProductsByName, getProductsByCategory } from "../fetches.js";
 
 const Products = () => {
     const [products, setProducts] = useState([])
@@ -32,16 +31,14 @@ const Products = () => {
     const chooseCategory = (e) => {
         if (filter !== '' && e.target.value !== '') {
             setCategory(e.target.value)
-            let path = `api/products/${filter + e.target.value}`
-            fetch(path)
+            getProductsByCategory(filter + category)
                 .then(res => res.json())
                 .then((data) => {
                     setProducts(data)
-                    console.log(path);
                 })
                 .catch(err => console.error(err))
         } else {
-            fetch(`/api/products/`)
+            getProducts()
                 .then(res => res.json())
                 .then((data) => {
                     setProducts(data)

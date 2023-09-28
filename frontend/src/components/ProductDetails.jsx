@@ -7,13 +7,14 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Unstable_Grid2'
+import { getProductDetails } from "../fetches.js";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState(null)
     const {id} = useParams()
 
     useEffect(() => {
-        fetch('/api/products/detailed/' + id)
+        getProductDetails(id)
             .then(res => res.json())
             .then(json => setProduct(json))
     }, [id])
