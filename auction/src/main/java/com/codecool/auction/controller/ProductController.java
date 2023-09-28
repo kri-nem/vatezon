@@ -3,7 +3,6 @@ package com.codecool.auction.controller;
 import com.codecool.auction.controller.dto.NewProductDTO;
 import com.codecool.auction.controller.dto.ProductDetailedViewDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
-import com.codecool.auction.model.Product;
 import com.codecool.auction.model.Tag;
 import com.codecool.auction.service.ProductService;
 import com.codecool.auction.service.TagService;
@@ -31,24 +30,22 @@ public class ProductController {
         this.tagService = tagService;
     }
 
+    @GetMapping
+    public List<ProductGridViewDTO> getAllProducts() {
+        return productService.getAllProducts();
+    }
+
+    @RequestMapping(
+            method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public @ResponseBody boolean addNewProduct (
+            @RequestHeader("Authorization") String authHeader,
+            @ModelAttribute NewProductDTO newProduct) throws IOException {
+        return productService.addNewProduct(authHeader, newProduct);
+    }
 
     @GetMapping("/detailed/{id}")
     public ProductDetailedViewDTO getDetailedView(@PathVariable("id") Long id) {
         return productService.getProductDetailedViewDTO(id);
-    }
-
-    @RequestMapping(
-            path = "/{user-id}",
-            method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public @ResponseBody boolean addNewProduct (
-            @PathVariable("user-id") Long userId,
-            @ModelAttribute NewProductDTO newProduct) throws IOException {
-        return productService.addNewProduct(userId, newProduct);
-    }
-
-    @GetMapping
-    public List<ProductGridViewDTO> getAllProducts() {
-        return productService.getAllProducts();
     }
 
     @GetMapping("/category/{category}")
