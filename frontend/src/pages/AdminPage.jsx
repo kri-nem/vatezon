@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Loading from "../components/Loading"
+import UsersTable from "../components/UsersTable"
 
 function fetchUsers () {
     return fetch("/api/admin/users").then(res => res.json())
@@ -23,7 +24,7 @@ export default function AdminPage () {
     }
 
     return (
-        <>
+        /*<>
             <div className="users-list" id="users-list"> 
                 <table>
                     <thead>
@@ -47,6 +48,7 @@ export default function AdminPage () {
                     </tbody>
                 </table>
             </div>
-        </>
+        </>*/
+        <UsersTable users={users}/>
     )
 }
