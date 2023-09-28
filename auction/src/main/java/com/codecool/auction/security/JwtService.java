@@ -14,7 +14,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final String secretKey  = System.getenv("secret_key");
+    private final String secretKey  = "RvTQip5De9ajfOWYo4XlFluTPceFdKHNJ9daplBwR0k";
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
