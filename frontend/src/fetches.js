@@ -12,25 +12,21 @@ const SIGN_UP_URL = USERS_ROOT_URL + '/signup'
 const LOGIN_URL = USERS_ROOT_URL + '/login'
 
 const getDataWithAuthorization = (url) => fetch(url, {
-    headers: {
-        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    }
+  headers: {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+  }
 })
 
 const postFormData = (url, formData) => fetch(url, {
-    headers: {
-        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    },
-    method: 'POST',
-    body: formData
+  headers: {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+  }, method: 'POST', body: formData
 })
 
 const postJson = (url, data) => fetch(url, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
+  method: 'POST', headers: {
+    'Content-Type': 'application/json'
+  }, body: JSON.stringify(data)
 })
 
 //PRODUCTS

@@ -1,4 +1,4 @@
-import {styled} from "@mui/material/styles";
+import { styled } from '@mui/material/styles'
 
 const VisuallyHiddenInput = styled('input')`
   clip: rect(0 0 0 0);
