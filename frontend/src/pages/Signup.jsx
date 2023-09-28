@@ -74,7 +74,7 @@ export default function Signup() {
       addNewUser(newUser)
       .then(res => {
         if (res.status == 200) {
-          navigate("/products")
+          navigate("/login")
         }
       })
     } else {

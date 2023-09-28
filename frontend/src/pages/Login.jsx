@@ -13,17 +13,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Token } from '@mui/icons-material';
 
 const defaultTheme = createTheme();
 
 const postUser = (user) => {
-  return fetch('api/users/login', {
+  return fetch('/api/users/login', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(user)
-  })
+  }).then(response => response.text()).then(token => sessionStorage.setItem("token", token));
 }
 
 const checkAllRequiredFields = (username, password) => {
