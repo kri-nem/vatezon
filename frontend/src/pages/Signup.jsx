@@ -13,18 +13,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { postSignUp } from "../fetches.js";
 
 const defaultTheme = createTheme();
-
-const addNewUser = (user) => {
-  return fetch('api/users/signup', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(user)
-  })
-}
 
 const checkAllRequiredFields = (fields) => {
   for (let field of fields){
@@ -52,7 +43,6 @@ const notify = (boolean, message) => {
   }
 }
 
-
 export default function Signup() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -71,9 +61,9 @@ export default function Signup() {
         "email": email,
         "password": password,
       }
-      addNewUser(newUser)
+      postSignUp(newUser)
       .then(res => {
-        if (res.status == 200) {
+        if (res.ok) {
           navigate("/login")
         }
       })
