@@ -13,26 +13,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Token } from '@mui/icons-material';
+import { postLogIn } from "../fetches.js";
 
 const defaultTheme = createTheme();
 
-const postUser = (user) => {
-  return fetch('/api/users/login', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(user)
-  }).then(response => response.text()).then(token => sessionStorage.setItem("token", token));
-}
-
 const checkAllRequiredFields = (username, password) => {
-  if (username === "" || password === "") {
-    return false;
-  } else {
-    return true;
-  }
+  return username !== "" || password !== "";
 }
 
 const notify = (boolean, message) => {
@@ -57,26 +43,29 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (checkAllRequiredFields(username, password)){
+    if (checkAllRequiredFields(username, password)) {
       const user = {
         "username": username,
         "password": password,
       }
-      postUser(user)
-      .then((res) => {
-        if (res.status == 401) {
-          notify(false, "Invalid username or password!");
-        } else {
-          notify(true, "Successful login!");
-          navigate("/products");
-        }
-      });
+      const response = await postLogIn(user)
+      if (response.ok) {
+        const token = await response.text()
+        const payload = JSON.parse(atob(token.split('.')[1]))
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('user', payload.sub)
+        //sessionStorage.setItem('expiration', payload.exp)
+        notify(true, "Successful login!")
+        navigate("/products")
+      } else {
+        notify(false, "Invalid username or password!")
+      }
     } else {
       notify(false, "Please fill all required fields!")
     }
-  } 
+  }
 
   return (
     <>
