@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react"
+import {useState, useEffect} from "react"
 import ProductList from "../components/ProductsList"
+import {getProducts} from "../fetches.js";
+import {getTags} from "../fetches.js";
 
 const Products = () => {
     const [products, setProducts] = useState([])
@@ -8,19 +10,19 @@ const Products = () => {
     const [tags, setTags] = useState([])
 
     useEffect(() => {
-        fetch(`/api/products/`)
-        .then(res => res.json())
-        .then((data) => {
-            setProducts(data)
-        })
-        .catch(err => console.error(err))
+        getProducts()
+            .then(res => res.json())
+            .then((data) => {
+                setProducts(data)
+            })
+            .catch(err => console.error(err))
 
-        fetch(`/api/tags`)
-        .then(res => res.json())
-        .then((data) => {
-            setTags(data)
-        })
-        .catch(err => console.error(err))
+        getTags()
+            .then(res => res.json())
+            .then((data) => {
+                setTags(data)
+            })
+            .catch(err => console.error(err))
     }, [])
 
     const chooseFilter = (e) => {
@@ -40,16 +42,17 @@ const Products = () => {
                 .catch(err => console.error(err))
         } else {
             fetch(`/api/products/`)
-            .then(res => res.json())
-            .then((data) => {
-                setProducts(data)
-            })
-            .catch(err => console.error(err))
+                .then(res => res.json())
+                .then((data) => {
+                    setProducts(data)
+                })
+                .catch(err => console.error(err))
         }
     }
 
     return (
-        <ProductList category={category} products={products} chooseFilter={chooseFilter} filter={filter} chooseCategory={chooseCategory} tagsName={tags} />
+        <ProductList category={category} products={products} chooseFilter={chooseFilter} filter={filter}
+                     chooseCategory={chooseCategory} tagsName={tags}/>
     )
 }
 
