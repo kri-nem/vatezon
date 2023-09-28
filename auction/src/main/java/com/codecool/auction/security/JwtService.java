@@ -7,13 +7,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
+
 import java.security.Key;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
-    //@Value("${application.security.jwt.secret_key}")
     private final String secretKey  = System.getenv("secret_key");
     private Claims extractAllClaims(String token) {
         return Jwts
@@ -36,7 +36,6 @@ public class JwtService {
         return Jwts
                 .builder()
                 .setSubject(username)
-                .claim("roles", "ROLE_"+role)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
