@@ -1,4 +1,5 @@
 package com.codecool.auction.service;
+import com.codecool.auction.controller.dto.UserDetailForAdminDTO;
 import com.codecool.auction.controller.dto.UserLoginDTO;
 import com.codecool.auction.controller.dto.UserSignUpDTO;
 import com.codecool.auction.model.User;
@@ -8,11 +9,11 @@ import com.codecool.auction.security.user.Role;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -51,6 +52,14 @@ public class UserService {
         String email = userSignUpDTO.email();
         User user = new User(-1L, username, firstName, lastName, password, email, Role.USER, null, null);
         userDAO.save(user);
+    }
+
+    public List<UserDetailForAdminDTO> getUsersForAdmin () {
+      return userDAO.findAllByRole(Role.USER).stream().map(user -> convertUserToDTO(user)).toList();
+    }
+
+    private UserDetailForAdminDTO convertUserToDTO (User user) {
+      return new UserDetailForAdminDTO(user.getUserName(), user.getFirstName(), user.getLastName(),user.getEmail());
     }
 
 
