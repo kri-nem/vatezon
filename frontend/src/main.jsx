@@ -7,6 +7,7 @@ import AddProduct from "./pages/AddProduct";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import AdminPage from "./pages/AdminPage";
 import ProductDetails from "./components/ProductDetails";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductDetails />
+      },
+      {
+        path: "/admin",
+        element: <AdminPage />
       }
     ],
   },
