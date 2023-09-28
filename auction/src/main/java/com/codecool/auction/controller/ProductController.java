@@ -19,7 +19,7 @@ import java.util.Set;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -46,7 +46,7 @@ public class ProductController {
         return productService.addNewProduct(userId, newProduct);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<ProductGridViewDTO> getAllProducts() {
         return productService.getAllProducts();
     }
