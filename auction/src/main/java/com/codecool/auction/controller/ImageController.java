@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-@RequestMapping("api/pictures")
+@RequestMapping("/api/pictures")
 public class ImageController {
     static final Path PICTURES_PATH = Paths.get("uploaded_pictures").toAbsolutePath();
 

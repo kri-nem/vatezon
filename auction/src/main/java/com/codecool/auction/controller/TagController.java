@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/tags")
+@RequestMapping("/api/tags")
 public class TagController {
   private final TagService tagService;
 
@@ -25,12 +25,12 @@ public class TagController {
     return tagService.getAllTags();
   }
 
-  @GetMapping(value = "name")
+  @GetMapping(value = "/name")
   public Set<TagListDTO> getAllTagNames() {
     return tagService.findAllByName();
   }
 
-  @PostMapping("add")
+  @PostMapping("/add")
   public Tag addTag(@RequestBody Tag tag) {
     tag.setEndpoint(String.join("-", tag.getName().split(" ")).toLowerCase());
     return tagService.addTag(tag);

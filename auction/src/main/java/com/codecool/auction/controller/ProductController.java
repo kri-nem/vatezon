@@ -32,7 +32,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("detailed/{id}")
+    @GetMapping("/detailed/{id}")
     public ProductDetailedViewDTO getDetailedView(@PathVariable("id") Long id) {
         return productService.getProductDetailedViewDTO(id);
     }

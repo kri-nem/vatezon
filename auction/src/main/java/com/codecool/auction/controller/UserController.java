@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
@@ -19,12 +19,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public String checkUserForLogin (@RequestBody UserLoginDTO userLoginDTO){
         return userService.checkLoginUser(userLoginDTO);
     }
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public void addNewUser (@RequestBody UserSignUpDTO userSignUpDTO) {
         userService.addNewUser(userSignUpDTO);
     }
