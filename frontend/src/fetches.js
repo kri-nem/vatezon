@@ -13,13 +13,13 @@ const LOGIN_URL = USERS_ROOT_URL + '/login'
 
 const getDataWithAuthorization = (url) => fetch(url, {
     headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token')
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
 })
 
 const postFormData = (url, formData) => fetch(url, {
     headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token')
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     },
     method: 'POST',
     body: formData
