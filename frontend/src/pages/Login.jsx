@@ -65,13 +65,21 @@ export default function Login() {
       }
       postUser(user)
       .then((res) => {
-        if (res.status == 401) {
+        if (!res.ok) {
           notify(false, "Invalid username or password!");
         } else {
           notify(true, "Successful login!");
           navigate("/products");
         }
-      });
+      })
+      /*.then((res) => {
+        /*if (res.stat == 200) {
+          notify(false, "Invalid username or password!");
+        } else {
+          notify(true, "Successful login!");
+          navigate("/products");
+        })
+      //});*/
     } else {
       notify(false, "Please fill all required fields!")
     }
