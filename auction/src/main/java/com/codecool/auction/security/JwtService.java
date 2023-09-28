@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class JwtService {
@@ -33,8 +35,11 @@ public class JwtService {
     }
 
     public String buildToken (String username, Role role) {
+        Map<String, String> claims = new HashMap<>();
+        claims.put("roles", "ROLE_" + role.name());
         return Jwts
                 .builder()
+                .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
