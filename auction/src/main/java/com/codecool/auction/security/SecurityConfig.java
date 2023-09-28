@@ -21,10 +21,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/api/users/signup", "/api/users/login", "/", "/login", "/signup").permitAll();
+                    req.requestMatchers("/api/users/signup", "/api/users/login", "/", "/login", "/signup", "/api/admin/users").permitAll();
                     req.anyRequest().authenticated();
                 })
-
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
