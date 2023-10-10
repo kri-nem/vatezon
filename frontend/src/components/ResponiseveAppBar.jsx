@@ -111,7 +111,6 @@ function ResponsiveAppBar () {
                 {page[0]}
               </Button>
             </Link>
-
           ))}
         </Box>
       </Toolbar>
