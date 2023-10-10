@@ -55,7 +55,6 @@ export default function Login () {
         const payload = JSON.parse(atob(token.split('.')[1]))
         sessionStorage.setItem('token', token)
         sessionStorage.setItem('user', payload.sub)
-        //sessionStorage.setItem('expiration', payload.exp)
         notify(true, 'Successful login!')
         navigate('/products')
       } else {
