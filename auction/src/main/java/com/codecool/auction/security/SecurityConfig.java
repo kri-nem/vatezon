@@ -23,8 +23,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/api/pictures/**", "/api/users/**", "/api/admin/users").permitAll();
-                    req.requestMatchers(HttpMethod.GET,"/api/products").permitAll();
-                    req.requestMatchers(HttpMethod.POST,"/api/products").permitAll();
+                    req.requestMatchers(HttpMethod.GET,"/vite.svg", "/assets/**", "/", "/index.html", "/api/products", "/products", "/addProduct", "/login", "/signup").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
