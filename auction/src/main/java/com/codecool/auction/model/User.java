@@ -1,5 +1,6 @@
 package com.codecool.auction.model;
 
+import com.codecool.auction.security.user.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +25,8 @@ public class User {
     String lastName;
     String password;
     String email;
+    @Enumerated(EnumType.STRING)
+    Role role;
     @OneToMany(mappedBy = "uploader")
     Set<Product> productsToSell;
     @OneToMany(mappedBy = "buyer")

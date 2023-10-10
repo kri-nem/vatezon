@@ -1,11 +1,10 @@
-import { Outlet } from "react-router-dom";
-import ResponsiveAppBar from "../components/ResponiseveAppBar";
-import frontPictur from "../assets/vatezon.png"
-import { Box } from '@mui/material';
+import { Outlet } from 'react-router-dom'
+import ResponsiveAppBar from '../components/ResponiseveAppBar'
+import frontPictur from '../assets/vatezon.png'
+import { Box } from '@mui/material'
 
 const Layout = () => {
-  return (
-    <div className="Layout">
+  return (<div className="Layout">
       <ResponsiveAppBar/>
       <Box
         component="div"
@@ -20,9 +19,8 @@ const Layout = () => {
           zIndex: '-1',
         }}
       />
-      <Outlet />
-    </div>
-  )
+      <Outlet/>
+    </div>)
 }
 
-export default Layout;
+export default Layout

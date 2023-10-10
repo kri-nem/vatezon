@@ -9,6 +9,7 @@ import com.codecool.auction.model.User;
 import com.codecool.auction.repository.ProductDAO;
 import com.codecool.auction.repository.TagDAO;
 import com.codecool.auction.repository.UserDAO;
+import com.codecool.auction.security.JwtService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,14 @@ public class ProductService {
     final ProductDAO productDAO;
     final UserDAO userDao;
     final TagDAO tagDAO;
+    final JwtService jwtService;
 
     @Autowired
-    public ProductService(ProductDAO productDAO, UserDAO userDao, TagDAO tagDAO) {
+    public ProductService(ProductDAO productDAO, UserDAO userDao, TagDAO tagDAO, JwtService jwtService) {
         this.productDAO = productDAO;
         this.userDao = userDao;
         this.tagDAO = tagDAO;
+        this.jwtService = jwtService;
     }
 
     public List<ProductGridViewDTO> getAllProducts() {
@@ -55,14 +58,17 @@ public class ProductService {
                 .collect(Collectors.toSet());
     }
 
-    public boolean addNewProduct(Long userId, NewProductDTO newProduct) throws IOException {
+    public boolean addNewProduct(String authHeader, NewProductDTO newProduct) throws IOException {
         String[] originalImageName = Objects.requireNonNull(newProduct.picture().getOriginalFilename()).split("\\.");
         String imageExtension = originalImageName[originalImageName.length - 1];
 
         String fileName =  UUID.randomUUID() + "." + imageExtension;
         File destination = new File(System.getenv("image_folder") + fileName);
 
-        Product product = buildProduct(newProduct, userId, fileName);
+        String jwt = authHeader.substring(7);
+        String userName = jwtService.extractUsername(jwt);
+
+        Product product = buildProduct(newProduct, userName, fileName);
 
         newProduct.picture().transferTo(destination);
 
@@ -71,8 +77,8 @@ public class ProductService {
         return true;
     }
 
-    private Product buildProduct(NewProductDTO newProduct, Long userId, String fileName) {
-        User uploader = userDao.getUserById(userId);
+    private Product buildProduct(NewProductDTO newProduct, String userName, String fileName) {
+        User uploader = userDao.findByUserName(userName);
         Set<Tag> tags = mapTagNamesToTags(newProduct);
         return Product.builder()
                 .name(newProduct.name())

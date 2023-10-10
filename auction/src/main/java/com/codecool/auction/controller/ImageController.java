@@ -14,9 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-@RequestMapping("api/pictures")
+@RequestMapping("/api/pictures")
 public class ImageController {
-    static final Path PICTURES_PATH = Paths.get("uploaded_pictures").toAbsolutePath();
 
     @GetMapping(value = "{pic_name}")
     public @ResponseBody byte[] getPicture(@PathVariable String pic_name) throws IOException {

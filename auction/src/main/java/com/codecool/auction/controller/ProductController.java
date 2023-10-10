@@ -3,7 +3,6 @@ package com.codecool.auction.controller;
 import com.codecool.auction.controller.dto.NewProductDTO;
 import com.codecool.auction.controller.dto.ProductDetailedViewDTO;
 import com.codecool.auction.controller.dto.ProductGridViewDTO;
-import com.codecool.auction.model.Product;
 import com.codecool.auction.model.Tag;
 import com.codecool.auction.service.ProductService;
 import com.codecool.auction.service.TagService;
@@ -19,7 +18,7 @@ import java.util.Set;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -31,24 +30,22 @@ public class ProductController {
         this.tagService = tagService;
     }
 
-
-    @GetMapping("detailed/{id}")
-    public ProductDetailedViewDTO getDetailedView(@PathVariable("id") Long id) {
-        return productService.getProductDetailedViewDTO(id);
+    @GetMapping
+    public List<ProductGridViewDTO> getAllProducts() {
+        return productService.getAllProducts();
     }
 
     @RequestMapping(
-            path = "/{user-id}",
             method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public @ResponseBody boolean addNewProduct (
-            @PathVariable("user-id") Long userId,
+            @RequestHeader("Authorization") String authHeader,
             @ModelAttribute NewProductDTO newProduct) throws IOException {
-        return productService.addNewProduct(userId, newProduct);
+        return productService.addNewProduct(authHeader, newProduct);
     }
 
-    @GetMapping("/")
-    public List<ProductGridViewDTO> getAllProducts() {
-        return productService.getAllProducts();
+    @GetMapping("/detailed/{id}")
+    public ProductDetailedViewDTO getDetailedView(@PathVariable("id") Long id) {
+        return productService.getProductDetailedViewDTO(id);
     }
 
     @GetMapping("/category/{category}")
