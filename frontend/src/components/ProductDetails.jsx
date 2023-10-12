@@ -35,7 +35,7 @@ export default function ProductDetails () {
           <Card sx={{ maxWidth: 600 }}>
             <CardMedia
               sx={{ height: 400 }}
-              image={'http://localhost:5173/api/pictures/' + product.picture}
+              image={'/api/pictures/' + product.picture}
               title="green iguana"
             />
             <CardContent>

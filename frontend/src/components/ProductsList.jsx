@@ -63,7 +63,7 @@ export default function ProductsGrid ({ category, products, chooseFilter, filter
 
           {products && products.map((product) => (<Grid key={product.id} xs={4} md={3}>
               <Item sx={{
-                backgroundImage: `url(http://localhost:5173/api/pictures/${product.picture})`,
+                backgroundImage: `url(/api/pictures/${product.picture})`,
               }}>
                 <Link to={`/product/${product.id}`}>
                   <Box sx={{
