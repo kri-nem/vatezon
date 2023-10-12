@@ -1,0 +1,7 @@
+auction/target/
+auction/src/resources/static/
+auction/src/resources/templates/
+**/node_modules/
+**/dist/
+.git
+.env
