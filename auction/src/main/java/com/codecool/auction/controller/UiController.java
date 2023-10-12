@@ -8,6 +8,6 @@ public class UiController {
 
     @GetMapping(value = {"/", "/products", "/addProduct", "/login", "/signup"})
     public String getIndex() {
-        return "/index.html";
+        return "index";
     }
 }
