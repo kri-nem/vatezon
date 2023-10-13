@@ -20,5 +20,8 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
+    volumes:
+      - db_volume:/var/lib/postgresql/data
 volumes:
   vatezon:
+  db_volume:
