@@ -6,13 +6,13 @@ services:
     volumes:
       - vatezon:/app/images
     environment:
-      - DB_HOST=postgres
-      - DB_PASSWORD=password
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_NAME=postgres
+      - DB_HOST=${DB_HOST}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
       - image_folder=/app/images/
-      - secret_key=+v0ewrNDCUUEvO5yF3tsfiMHHUrPOZkAv0KLoZuOIGIqpu2Uxf63WFRZ33z1bZwdN3t9ZKNzq+N/3SYNz8F7hw==
+      - secret_key=${secret_key}
     ports:
       - 5000:8080
   postgres:
