@@ -22,11 +22,12 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
     data.append('name', name)
     data.append('description', description)
     data.append('price', price)
-    data.append('tags', JSON.stringify([productType]))
+    data.append('tags', productType)
     data.append('picture', picture)
 
     console.log(data)
     return addNewProduct(data)
+    
   }
   const defaultTheme = createTheme()
 

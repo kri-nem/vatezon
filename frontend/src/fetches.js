@@ -1,7 +1,7 @@
 //PRODUCTS
-const PRODUCTS_ROOT_URL = '/api/products'
-const PRODUCT_BY_CATEGORIES_URL = PRODUCTS_ROOT_URL + '/category/'
-const PRODUCTS_BY_NAME = PRODUCTS_ROOT_URL + '/name/'
+const PRODUCTS_ROOT_URL = '/api/products/'
+//const PRODUCT_BY_CATEGORIES_URL = PRODUCTS_ROOT_URL + '/category/'
+//const PRODUCTS_BY_NAME = PRODUCTS_ROOT_URL + '/name/'
 const PRODUCT_DETAILS_URL = PRODUCTS_ROOT_URL + '/detailed/'
 const NEW_PRODUCT_URL = PRODUCTS_ROOT_URL
 //TAGS
@@ -31,8 +31,9 @@ const postJson = (url, data) => fetch(url, {
 
 //PRODUCTS
 export const getProducts = () => getDataWithAuthorization(PRODUCTS_ROOT_URL)
-export const getProductsByCategory = (category) => getDataWithAuthorization(PRODUCT_BY_CATEGORIES_URL + category)
-export const getProductsByName = (name) => getDataWithAuthorization(PRODUCTS_BY_NAME + name)
+//export const getProductsByCategory = (category) => getDataWithAuthorization(PRODUCT_BY_CATEGORIES_URL + category)
+//export const getProductsByName = (name) => getDataWithAuthorization(PRODUCTS_BY_NAME + name)
+export const getProductsBy = (completeEndpoint) => getDataWithAuthorization(PRODUCTS_ROOT_URL + completeEndpoint)
 export const getProductDetails = (id) => getDataWithAuthorization(PRODUCT_DETAILS_URL + id)
 export const postNewProductForm = (formData) => postFormData(NEW_PRODUCT_URL, formData)
 //TAGS
