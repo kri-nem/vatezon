@@ -1,5 +1,5 @@
 //PRODUCTS
-const PRODUCTS_ROOT_URL = '/api/products/'
+const PRODUCTS_ROOT_URL = '/api/products'
 //const PRODUCT_BY_CATEGORIES_URL = PRODUCTS_ROOT_URL + '/category/'
 //const PRODUCTS_BY_NAME = PRODUCTS_ROOT_URL + '/name/'
 const PRODUCT_DETAILS_URL = PRODUCTS_ROOT_URL + '/detailed/'

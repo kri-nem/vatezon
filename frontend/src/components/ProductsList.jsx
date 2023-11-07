@@ -39,15 +39,15 @@ export default function ProductsGrid ({ category, products, chooseFilter, filter
                 label="filter-by"
                 onChange={chooseFilter}
               >
-                <MenuItem value={'name/'}>Name</MenuItem>
-                <MenuItem value={'category/'}>Category</MenuItem>
+                <MenuItem value={'/name/'}>Name</MenuItem>
+                <MenuItem value={'/category/'}>Category</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid xs={9} sx={{
             backgroundColor: '#ffffffcc'
           }}>
-            {filter === 'category/' ? <FormControl fullWidth>
+            {filter === '/category/' ? <FormControl fullWidth>
               <InputLabel id="dsa">Choose category</InputLabel>
               <Select
                 labelId="dsa"
@@ -57,7 +57,7 @@ export default function ProductsGrid ({ category, products, chooseFilter, filter
                 onChange={chooseCategory}
               >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
               </Select>
-            </FormControl> : filter === 'name/' ? <TextField fullWidth type="text" id="input"
+            </FormControl> : filter === '/name/' ? <TextField fullWidth type="text" id="input"
                                                              onChange={chooseCategory}></TextField> : <></>}
           </Grid>
 
