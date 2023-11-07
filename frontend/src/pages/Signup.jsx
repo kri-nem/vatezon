@@ -96,7 +96,7 @@ export default function Signup () {
             <Avatar sx={{ m: 1, bgcolor: '#85b883' }}>
               <LockOutlinedIcon/>
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" sx={{textDecoration: 'underline'}}>
               Sign up
             </Typography>
             <Box component="form" onSubmit={handleSignup} noValidate sx={{ mt: 3 }}>

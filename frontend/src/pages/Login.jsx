@@ -93,7 +93,7 @@ export default function Login () {
             <Avatar sx={{ m: 1, bgcolor: '#85b883' }}>
               <LockOutlinedIcon/>
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" sx={{textDecoration: 'underline'}}>
               Sign in
             </Typography>
             <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
