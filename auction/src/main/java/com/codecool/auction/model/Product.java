@@ -1,5 +1,6 @@
 package com.codecool.auction.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -33,7 +34,7 @@ public class Product {
     @ManyToMany
     Set<Tag> tags;
 
-
+    @JsonIgnore
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
