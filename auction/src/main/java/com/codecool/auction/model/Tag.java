@@ -21,6 +21,10 @@ public class Tag {
     String name;
     String endpoint;
 
+    @JsonIgnore
+    @ManyToMany
+    Set<Product> products;
+
     @Override
     public String toString() {
         return "Tag{" +
