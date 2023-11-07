@@ -21,77 +21,91 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundPosition: 'center',
 }))
 
-export default function ProductsGrid ({ category, products, chooseFilter, filter, chooseCategory, tagsName: tags }) {
+const style = {
+  "& label.Mui-focused": {
+    color: "darkgreen"
+  },
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: "black"
+    }
+  }
+}
+
+export default function ProductsGrid({ category, products, chooseFilter, filter, chooseCategory, tagsName: tags }) {
   return (<>
-      <Box sx={{
-        margin: '0% 3% 0% 3%', padding: '5% 3% 0% 3%', backgroundColor: '#ffffffcc'
-      }}>
-        <Grid container spacing={5}>
-          <Grid xs={3} sx={{
-            backgroundColor: '#ffffffcc'
-          }}>
-            <FormControl key={'asd'} fullWidth>
-              <InputLabel id="asd">Filter By: </InputLabel>
-              <Select
-                labelId="asd"
-                id="asd"
-                value={filter}
-                label="filter-by"
-                onChange={chooseFilter}
-              >
-                <MenuItem value={'name/'}>Name</MenuItem>
-                <MenuItem value={'category/'}>Category</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid xs={9} sx={{
-            backgroundColor: '#ffffffcc'
-          }}>
-            {filter === 'category/' ? <FormControl fullWidth>
-              <InputLabel id="dsa">Choose category</InputLabel>
-              <Select
-                labelId="dsa"
-                id="dsa"
-                value={category}
-                label="filter"
-                onChange={chooseCategory}
-              >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
-              </Select>
-            </FormControl> : filter === 'name/' ? <TextField fullWidth type="text" id="input"
-                                                             onChange={chooseCategory}></TextField> : <></>}
-          </Grid>
-
-          {products && products.map((product) => (<Grid key={product.id} xs={4} md={3}>
-              <Item sx={{
-                backgroundImage: `url(http://localhost:5173/api/pictures/${product.picture})`,
-              }}>
-                <Link to={`/product/${product.id}`}>
-                  <Box sx={{
-                    backgroundColor: '#ffffffcc'
-                  }}>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontWeight: 700, textDecoration: 'none',
-                      }}
-                    >
-                      {product.name}
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontWeight: 700, textDecoration: 'none',
-                      }}
-                    >
-                      Price: {product.price}
-                    </Typography></Box>
-
-                </Link>
-              </Item>
-            </Grid>))}
+    <Box sx={{
+      margin: '0% 3% 0% 3%', padding: '7% 3% 0% 3%', backgroundColor: 'rgba(226,194,95,0.75)'
+    }}>
+      <Grid container spacing={5}>
+        <Grid xs={3} sx={{
+          backgroundColor: '#ffffffcc'
+        }}>
+          <FormControl key={'asd'} fullWidth sx={style}>
+            <InputLabel id="asd">Filter By: </InputLabel>
+            <Select
+              labelId="asd"
+              id="asd"
+              value={filter}
+              label="filter-by"
+              onChange={chooseFilter}
+            >
+              <MenuItem value={'name/'}>Name</MenuItem>
+              <MenuItem value={'category/'}>Category</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-      </Box>
-    </>)
+        <Grid xs={9} sx={{
+          backgroundColor: '#ffffffcc'
+        }}>
+          {filter === 'category/' ? <FormControl fullWidth sx={style} variant="outlined">
+            <InputLabel id="dsa">Choose category</InputLabel>
+            <Select
+              value={category}
+              label="Choose category"
+              onChange={chooseCategory}
+            >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
+            </Select>
+          </FormControl> : filter === 'name/' ?
+            <TextField fullWidth type="text"
+              sx={style}
+              label="Type products name..."
+              id="input"
+              onChange={chooseCategory}>
+            </TextField> : <></>}
+        </Grid>
+
+        {products && products.map((product) => (<Grid key={product.id} xs={4} md={3}>
+          <Item sx={{
+            backgroundImage: `url(http://localhost:5173/api/pictures/${product.picture})`,
+          }}>
+            <Link to={`/product/${product.id}`}>
+              <Box sx={{
+                backgroundColor: '#ffffffcc'
+              }}>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  {product.name}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  Price: {product.price}
+                </Typography></Box>
+
+            </Link>
+          </Item>
+        </Grid>))}
+      </Grid>
+    </Box>
+  </>)
 }
