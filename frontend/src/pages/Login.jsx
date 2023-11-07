@@ -65,6 +65,17 @@ export default function Login () {
     }
   }
 
+  const style = {
+    "& label.Mui-focused": {
+      color: "darkgreen"
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "black"
+      }
+    }
+  } 
+
   return (<>
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
@@ -75,11 +86,11 @@ export default function Login () {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              backgroundColor: '#ffffffcc',
+              backgroundColor: 'rgba(255, 241, 230, 0.5)',
               padding: '10%',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: '#85b883' }}>
               <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -96,6 +107,7 @@ export default function Login () {
                 autoComplete="username"
                 autoFocus
                 onChange={e => setUsername(e.target.value)}
+                sx={style}
               />
               <TextField
                 margin="normal"
@@ -107,23 +119,31 @@ export default function Login () {
                 id="password"
                 autoComplete="current-password"
                 onChange={e => setPassword(e.target.value)}
+                sx={style}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: '#407e65', // Normal button color
+                  '&:hover': {
+                    backgroundColor: '#85b883', // Color to change to on hover
+                  }
+                }}
               >
-                Sign In
+                Log In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" sx={{ color: 'black', '&:hover': { color: 'green' }, textDecorationColor: 'black'}}>
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" sx={{ color: 'black', '&:hover': { color: 'green' }, textDecorationColor: 'black'}}>
                     {'Don\'t have an account? Sign Up'}
                   </Link>
                 </Grid>
