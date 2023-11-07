@@ -27,20 +27,31 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
 
     console.log(data)
     return addNewProduct(data)
-    
+
   }
   const defaultTheme = createTheme()
 
+  const style = {
+    "& label.Mui-focused": {
+      color: "darkgreen"
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "black"
+      }
+    }
+  } 
+
   return (<ThemeProvider theme={defaultTheme}>
     <Container component="main" maxWidth="xs" onSubmit={handleSubmit}>
-      <CssBaseline/>
+      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: '#958a68',
+          backgroundColor: 'rgba(255, 241, 230, 0.5)',
           padding: '10%',
         }}
       >
@@ -57,6 +68,7 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
             name="name"
             autoFocus
             onChange={(e) => setName(e.target.value)}
+            sx={style}
           />
           <TextField
             margin="normal"
@@ -66,6 +78,7 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
             label="Description"
             id="description"
             onChange={(e) => setDescription(e.target.value)}
+            sx={style}
           />
           <TextField
             margin="normal"
@@ -76,19 +89,28 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
             name="price"
             autoFocus
             onChange={(e) => setPrice(e.target.value)}
+            sx={style}
           />
 
           <Button
             margin="normal"
             component="label"
             variant="contained"
-            startIcon={<CloudUploadIcon/>}
+            startIcon={<CloudUploadIcon />}
             href="#file-upload"
             fullWidth
             onChange={(e) => setPicture(e.target.files[0])}
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: '#407e65', // Normal button color
+              '&:hover': {
+                backgroundColor: '#85b883', // Color to change to on hover
+              }
+            }}
           >
             Upload a file
-            <VisuallyHiddenInput accept="image/*" type="file"/>
+            <VisuallyHiddenInput accept="image/*" type="file" />
           </Button>
 
           <label htmlFor="productType">Product type:</label>
@@ -96,12 +118,19 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
             <option disabled>Select a type!</option>
             {productTypes.map((o, i) => <option key={i} value={o.name}>{o.name}</option>)}
           </select>
-          <hr/>
+          <hr />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: '#407e65', // Normal button color
+              '&:hover': {
+                backgroundColor: '#85b883', // Color to change to on hover
+              }
+            }}
           >
             Submit
           </Button>
