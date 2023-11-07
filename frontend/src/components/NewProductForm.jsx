@@ -40,7 +40,7 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: '#ffffffcc',
+          backgroundColor: '#958a68',
           padding: '10%',
         }}
       >

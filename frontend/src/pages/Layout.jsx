@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import ResponsiveAppBar from '../components/ResponiseveAppBar'
-import frontPictur from '../assets/vatezon.png'
+import frontPictur from '../assets/backg.jpg'
 import { Box } from '@mui/material'
 
 const Layout = () => {

@@ -25,7 +25,7 @@ function ResponsiveAppBar () {
     setAnchorElNav(null)
   }
 
-  return (<AppBar position="fixed">
+  return (<AppBar position="fixed" sx={{ backgroundColor: '#407e65' }}>
     <Container maxWidth="xl">
       <Toolbar disableGutters>
         <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
@@ -44,7 +44,7 @@ function ResponsiveAppBar () {
             textDecoration: 'none',
           }}
         >
-          VATEZON
+          Bay
         </Typography>
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -74,7 +74,7 @@ function ResponsiveAppBar () {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            {pages.map((page) => (<Link key={page[0]} to={page[1]}>
+            {pages.map((page) => (<Link key={page[0]} to={page[1]} style={{ textDecoration: 'none' }}>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page[0]}</Typography>
                 </MenuItem>

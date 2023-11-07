@@ -68,6 +68,17 @@ export default function Signup () {
     }
   }
 
+  const style = {
+    "& label.Mui-focused": {
+      color: "darkgreen"
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "black"
+      }
+    }
+  } 
+
   return (<>
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
@@ -78,11 +89,11 @@ export default function Signup () {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              backgroundColor: '#ffffffcc',
+              backgroundColor: 'rgba(255, 241, 230, 0.5)',
               padding: '10%',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: '#85b883' }}>
               <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -100,6 +111,7 @@ export default function Signup () {
                     label="First Name"
                     autoFocus
                     onChange={e => setFirstname(e.target.value)}
+                    sx={style}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -111,6 +123,7 @@ export default function Signup () {
                     name="lastName"
                     autoComplete="family-name"
                     onChange={e => setLastname(e.target.value)}
+                    sx={style}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -122,6 +135,7 @@ export default function Signup () {
                     name="username"
                     autoComplete="username"
                     onChange={e => setUsername(e.target.value)}
+                    sx={style}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -133,6 +147,7 @@ export default function Signup () {
                     name="email"
                     autoComplete="email"
                     onChange={e => setEmail(e.target.value)}
+                    sx={style}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -145,6 +160,7 @@ export default function Signup () {
                     id="password"
                     autoComplete="new-password"
                     onChange={e => setPassword(e.target.value)}
+                    sx={style}
                   />
                 </Grid>
               </Grid>
@@ -152,13 +168,20 @@ export default function Signup () {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    backgroundColor: '#407e65', // Normal button color
+                    '&:hover': {
+                      backgroundColor: '#85b883', // Color to change to on hover
+                    }
+                  }}
               >
                 Sign Up
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" sx={{ color: 'black' }}>
                     Already have an account? Sign in
                   </Link>
                 </Grid>
