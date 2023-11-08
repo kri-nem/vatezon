@@ -134,10 +134,6 @@ export default function Login () {
               >
                 Log In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Container>
