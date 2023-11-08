@@ -2,11 +2,7 @@ package com.codecool.auction.controller;
 
 import com.codecool.auction.controller.dto.UserDetailForAdminDTO;
 import com.codecool.auction.service.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
