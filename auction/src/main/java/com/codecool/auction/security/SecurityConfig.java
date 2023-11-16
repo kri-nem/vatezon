@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/api/pictures/**", "/api/users/**").permitAll();
-                    req.requestMatchers(HttpMethod.GET,"/vite.svg", "/assets/**", "/", "/index.html", "/api/products", "/products", "/addProduct", "/login", "/signup").permitAll();
+                    req.requestMatchers(HttpMethod.GET,"/vite.svg", "/assets/**", "/", "/index.html", "/api/products/**","/api/products/name/**", "/api/products/category/**", "/products", "/addProduct", "/login", "/signup", "/api/tags/name", "/api/tags").permitAll();
                     req.requestMatchers("/api/admin/**").hasRole(Role.ADMIN.name());
                     req.anyRequest().authenticated();
                 })
