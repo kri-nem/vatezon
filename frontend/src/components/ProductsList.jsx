@@ -99,7 +99,7 @@ export default function ProductsGrid({ category, products, chooseFilter, filter,
                     fontWeight: 700, textDecoration: 'none',
                   }}
                 >
-                  Price: {product.price}
+                  Price: {product.price} $
                 </Typography></Box>
 
             </Link>
