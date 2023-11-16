@@ -27,19 +27,19 @@ export default function ProductDetails () {
         alignItems="center"
         justify="center"
         style={{
-          minHeight: '100vh', margin: '0% 3% 0% 3%', padding: '5% 3% 0% 3%', backgroundColor: '#ffffffcc'
+          minHeight: '100vh', margin: '0% 3% 0% 3%', padding: '5% 3% 0% 3%', backgroundColor: 'rgba(251,235,216,0.75)'
         }}
       >
 
-        <Grid xs={3}>
+        <Grid xs={6} >
           <Card sx={{ maxWidth: 600 }}>
             <CardMedia
               sx={{ height: 400 }}
               image={'http://localhost:5173/api/pictures/' + product.picture}
               title="green iguana"
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+            <CardContent sx={{margin: '0% 5% 0% 6%'}}>
+              <Typography gutterBottom variant="h5" component="div" sx={{textDecoration: 'underline', color: '#407e65'}}>
                 {product.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -50,7 +50,16 @@ export default function ProductDetails () {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="large">Buy for {product.price}$</Button>
+              <Button size="large" sx={{
+              mt: 3,
+              mb: 2,
+              margin: '0% 5% 5% 37%',
+              backgroundColor: '#407e65', // Normal button color
+              color: 'black',
+              '&:hover': {
+                backgroundColor: '#85b883', // Color to change to on hover
+              }
+            }}>Buy for {product.price}$</Button>
             </CardActions>
           </Card>
         </Grid>

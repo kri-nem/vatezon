@@ -113,7 +113,7 @@ const NewProductForm = ({ productTypes, addNewProduct }) => {
             <VisuallyHiddenInput accept="image/*" type="file" />
           </Button>
 
-          <label htmlFor="productType" style={{margin: '5% 3% 0% 15%', fontSize: 20, }} >Product type:</label>
+          <label htmlFor="productType" style={{margin: '5% 3% 0% 10%', fontSize: 18, }} >Product type:</label>
           <select defaultValue="Select a type!" onChange={(e) => setProductType(e.target.value)}>
             <option disabled>Select a type!</option>
             {productTypes.map((o, i) => <option key={i} value={o.name}>{o.name}</option>)}

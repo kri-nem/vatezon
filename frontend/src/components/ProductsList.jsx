@@ -35,7 +35,7 @@ const style = {
 export default function ProductsGrid({ category, products, chooseFilter, filter, chooseCategory, tagsName: tags }) {
   return (<>
     <Box sx={{
-      margin: '0% 3% 0% 3%', padding: '7% 3% 0% 3%', backgroundColor: 'rgba(226,194,95,0.75)'
+      margin: '0% 3% 0% 3%', padding: '7% 3% 0% 3%', backgroundColor: 'rgba(251,235,216,0.75)'
     }}>
       <Grid container spacing={5}>
         <Grid xs={3} sx={{
@@ -50,15 +50,15 @@ export default function ProductsGrid({ category, products, chooseFilter, filter,
               label="filter-by"
               onChange={chooseFilter}
             >
-              <MenuItem value={'name/'}>Name</MenuItem>
-              <MenuItem value={'category/'}>Category</MenuItem>
+              <MenuItem value={'/name/'}>Name</MenuItem>
+              <MenuItem value={'/category/'}>Category</MenuItem>
             </Select>
           </FormControl>
         </Grid>
         <Grid xs={9} sx={{
           backgroundColor: '#ffffffcc'
         }}>
-          {filter === 'category/' ? <FormControl fullWidth sx={style} variant="outlined">
+          {filter === '/category/' ? <FormControl fullWidth sx={style} variant="outlined">
             <InputLabel id="dsa">Choose category</InputLabel>
             <Select
               value={category}
@@ -66,7 +66,7 @@ export default function ProductsGrid({ category, products, chooseFilter, filter,
               onChange={chooseCategory}
             >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
             </Select>
-          </FormControl> : filter === 'name/' ?
+          </FormControl> : filter === '/name/' ?
             <TextField fullWidth type="text"
               sx={style}
               label="Type products name..."
@@ -99,7 +99,7 @@ export default function ProductsGrid({ category, products, chooseFilter, filter,
                     fontWeight: 700, textDecoration: 'none',
                   }}
                 >
-                  Price: {product.price}
+                  Price: {product.price} $
                 </Typography></Box>
 
             </Link>
