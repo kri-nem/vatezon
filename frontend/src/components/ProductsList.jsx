@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', ...theme.typography.body2,
@@ -33,79 +35,81 @@ const style = {
 }
 
 export default function ProductsGrid({ category, products, chooseFilter, filter, chooseCategory, tagsName: tags }) {
-  return (<>
-    <Box sx={{
-      margin: '0% 3% 0% 3%', padding: '7% 3% 0% 3%', backgroundColor: 'rgba(251,235,216,0.75)'
-    }}>
-      <Grid container spacing={5}>
-        <Grid xs={3} sx={{
-          backgroundColor: '#ffffffcc'
-        }}>
-          <FormControl key={'asd'} fullWidth sx={style}>
-            <InputLabel id="asd">Filter By: </InputLabel>
-            <Select
-              labelId="asd"
-              id="asd"
-              value={filter}
-              label="filter-by"
-              onChange={chooseFilter}
+
+  return (
+    <>
+      <Box sx={{
+        margin: '0% 3% 0% 3%', padding: '7% 3% 0% 3%', backgroundColor: 'rgba(251,235,216,0.75)'
+      }}>
+        <Grid container spacing={5}>
+          <Grid xs={3} sx={{ backgroundColor: '#ffffffcc' }} >
+            <FormControl key={'asd'} fullWidth sx={style}>
+              <InputLabel id="asd">Filter By: </InputLabel>
+              <Select
+                labelId="asd"
+                id="asd"
+                value={filter}
+                label="filter-by"
+                onChange={chooseFilter}
+              >
+                <MenuItem value={'/name/'}>Name</MenuItem>
+                <MenuItem value={'/category/'}>Category</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid xs={9} sx={{ backgroundColor: '#ffffffcc' }}>
+            {filter === '/category/' ? <FormControl fullWidth sx={style} variant="outlined">
+              <InputLabel id="dsa">Choose category</InputLabel>
+              <Select
+                value={category}
+                label="Choose category"
+                onChange={chooseCategory}
+              >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
+              </Select>
+            </FormControl> : filter === '/name/' ?
+              <TextField fullWidth type="text"
+                sx={style}
+                label="Type products name..."
+                id="input"
+                onChange={chooseCategory}>
+              </TextField> : <></>}
+          </Grid>
+
+          {products && products.map((product) => (<Grid
+            key={product.id}
+            item xs={12} sm={6} md={4} lg={3} xl={3} // FONTOS: oszlopok száma screensize szerint
             >
-              <MenuItem value={'/name/'}>Name</MenuItem>
-              <MenuItem value={'/category/'}>Category</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid xs={9} sx={{
-          backgroundColor: '#ffffffcc'
-        }}>
-          {filter === '/category/' ? <FormControl fullWidth sx={style} variant="outlined">
-            <InputLabel id="dsa">Choose category</InputLabel>
-            <Select
-              value={category}
-              label="Choose category"
-              onChange={chooseCategory}
-            >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
-            </Select>
-          </FormControl> : filter === '/name/' ?
-            <TextField fullWidth type="text"
-              sx={style}
-              label="Type products name..."
-              id="input"
-              onChange={chooseCategory}>
-            </TextField> : <></>}
-        </Grid>
+            <Item sx={{
+              backgroundImage: `url(http://localhost:5173/api/pictures/${product.picture})`,
+            }}>
+              <Link to={`/product/${product.id}`}>
+                <Box sx={{
+                  backgroundColor: '#ffffffcc'
+                }}>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      fontWeight: 700, textDecoration: 'none',
+                    }}
+                  >
+                    {product.name}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      fontWeight: 700, textDecoration: 'none',
+                    }}
+                  >
+                    Price: {product.price} $
+                  </Typography></Box>
 
-        {products && products.map((product) => (<Grid key={product.id} xs={4} md={3}>
-          <Item sx={{
-            backgroundImage: `url(http://localhost:5173/api/pictures/${product.picture})`,
-          }}>
-            <Link to={`/product/${product.id}`}>
-              <Box sx={{
-                backgroundColor: '#ffffffcc'
-              }}>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontWeight: 700, textDecoration: 'none',
-                  }}
-                >
-                  {product.name}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontWeight: 700, textDecoration: 'none',
-                  }}
-                >
-                  Price: {product.price} $
-                </Typography></Box>
-
-            </Link>
-          </Item>
-        </Grid>))}
-      </Grid>
-    </Box>
-  </>)
+              </Link>
+            </Item>
+          </Grid>))}
+        </Grid>
+      </Box>
+    </>
+  )
 }
