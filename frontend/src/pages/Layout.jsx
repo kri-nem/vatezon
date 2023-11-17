@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import ResponsiveAppBar from '../components/ResponiseveAppBar'
+import ResponsiveAppBar from '../components/AppBar'
 import frontPictur from '../assets/backg.jpg'
 import { Box } from '@mui/material'
 
