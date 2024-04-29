@@ -31,6 +31,6 @@ Our team @fulopco, @gyenesboti and @kri-nem built this project as the last proje
 [issues-shield]: https://img.shields.io/github/issues/kri-nem/vatezon.svg?style=for-the-badge
 [issues-url]: https://github.com/kri-nem/vatezon/issues
 [license-shield]: https://img.shields.io/github/license/kri-nem/vatezon.svg?style=for-the-badge
-[license-url]: https://github.com/kri-nem/vatezon/blob/development/LICENSE.txt
+[license-url]: https://github.com/kri-nem/vatezon/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/kristof-nemeth-developer
