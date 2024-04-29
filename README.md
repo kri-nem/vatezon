@@ -21,6 +21,28 @@ Our team @fulopco, @gyenesboti and @kri-nem built this project as the last proje
 * [![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
 * [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
+## Getting Started
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+The only things You need to have is Docker with Compose installed on your system, and a browser.
+
+
+### Installing & Running
+Clone the repo and open a terminal in the project's root folder. First you need to have some variables set with proper values. For demo porpuses using default values on used docker images use the followings:
+```sh
+expert DB_HOST=postgres
+export DB_PORT=5432
+export DB_NAME=postgres
+export DB_USER=postgres
+export DB_PASSWORD=password
+export secret_key=sick_rat_key
+```
+In the same shell session You can simpy run:
+```sh
+docker compose up
+```
+Which will build the project. After the build completes visit <a href="http://localhost:5000">http://localhost:5000</a>
 
 [contributors-shield]: https://img.shields.io/github/contributors/kri-nem/vatezon.svg?style=for-the-badge
 [contributors-url]: https://github.com/kri-nem/vatezon/graphs/contributors
