@@ -2,7 +2,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=for-the-badge)](http://www.gnu.org/licenses/gpl-3.0)
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # Vatezon
@@ -31,6 +31,6 @@ Our team @fulopco, @gyenesboti and @kri-nem built this project as the last proje
 [issues-shield]: https://img.shields.io/github/issues/kri-nem/vatezon.svg?style=for-the-badge
 [issues-url]: https://github.com/kri-nem/vatezon/issues
 [license-shield]: https://img.shields.io/github/license/kri-nem/vatezon.svg?style=for-the-badge
-[license-url]: https://github.com/kri-nem/vatezon/blob/master/LICENSE.txt
+[license-url]: https://github.com/kri-nem/vatezon/blob/development/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/kristof-nemeth-developer
