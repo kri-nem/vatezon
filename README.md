@@ -8,9 +8,11 @@
 # Vatezon
 
 ## About The Project
-Vatezon is a full-stack web-shop application, using Spring Boot and Postgres for it's back-end and React.js with materialUI for it's front-end. The build process uses Docker, and You can run the demo using Docker Compose.
+Vatezon is a full-stack web-shop application, using Spring Boot and Postgres for its back end and React.js with MUI for its front end. The build process uses Docker, and You can run the demo using Docker Compose.
 
-Our team @fulopco, @gyenesboti and @kri-nem built this project as the last project of @CodecoolGlobal 's 10 month long full-time full-stack course.
+In Vatezon you can browse and filter listed products. After registration, you can upload a new product with a new picture. Planned features include buying products and an auction system.
+
+Our team [fulopco](https://github.com/fulopco), [gyenesboti](https://github.com/gyenesboti) and [kri-nem](https://github.com/kri-nem) built this project as the last project of @github/CodecoolGlobal 's 10 month long full-time full-stack course.
 
 ### Built With
 * [![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.org/)
@@ -25,11 +27,11 @@ Our team @fulopco, @gyenesboti and @kri-nem built this project as the last proje
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
-The only things You need to have is Docker with Compose installed on your system, and a browser.
+The only things You need to have are Docker with Compose installed on your system and a browser.
 
 
 ### Installing & Running
-Clone the repo and open a terminal in the project's root folder. First you need to have some variables set with proper values. For demo porpuses using default values on used docker images use the followings:
+Clone the repo and open a terminal in the project's root folder. First, you need to have some variables set with proper values. For demo porpuses using default values on used docker images use the following:
 ```sh
 expert DB_HOST=postgres
 export DB_PORT=5432
@@ -38,7 +40,7 @@ export DB_USER=postgres
 export DB_PASSWORD=password
 export secret_key=sick_rat_key
 ```
-In the same shell session You can simpy run:
+In the same shell session, You can simply run:
 ```sh
 docker compose up
 ```
