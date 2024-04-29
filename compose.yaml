@@ -1,0 +1,27 @@
+services:
+  spring:
+    depends_on:
+      - postgres
+    build: .
+    volumes:
+      - vatezon:/app/images
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+      - image_folder=/app/images/
+      - secret_key=${secret_key}
+    ports:
+      - 5000:8080
+  postgres:
+    image: postgres:16.0-alpine3.18
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+volumes:
+  vatezon:
+  db_volume:

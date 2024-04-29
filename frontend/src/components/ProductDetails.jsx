@@ -39,8 +39,8 @@ export default function ProductDetails() {
         <Grid xs={6} >
           <Card sx={{ maxWidth: '100vh' }}>
             <CardMedia
-              sx={{ height: 1000 }}
-              image={'http://localhost:5173/api/pictures/' + product.picture}
+              sx={{ height: 400 }}
+              image={'/api/pictures/' + product.picture}
               title="green iguana"
             />
             <CardContent sx={{ margin: '0% 5% 0% 6%' }}>
@@ -87,7 +87,7 @@ export default function ProductDetails() {
         <Card sx={{ maxWidth: '80vh' }}>
           <CardMedia
             sx={{ height: 550 }}
-            image={'http://localhost:5173/api/pictures/' + product.picture}
+            image={'/api/pictures/' + product.picture}
             title="green iguana"
           />
           <CardContent sx={{ margin: 'auto' }}>
