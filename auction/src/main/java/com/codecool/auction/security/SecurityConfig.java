@@ -1,4 +1,5 @@
 package com.codecool.auction.security;
+import com.codecool.auction.security.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/api/pictures/**", "/api/users/**", "/api/admin/users").permitAll();
-                    req.requestMatchers(HttpMethod.GET,"/vite.svg", "/assets/**", "/", "/index.html", "/api/products", "/products", "/addProduct", "/login", "/signup").permitAll();
+                    req.requestMatchers("/api/pictures/**", "/api/users/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET,"/vite.svg", "/assets/**", "/", "/index.html", "/api/products/**","/api/products/name/**", "/api/products/category/**", "/products", "/addProduct", "/login", "/signup", "/api/tags/name", "/api/tags").permitAll();
+                    req.requestMatchers("/api/admin/**").hasRole(Role.ADMIN.name());
                     req.anyRequest().authenticated();
                 })
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

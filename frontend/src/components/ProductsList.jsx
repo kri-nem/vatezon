@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', ...theme.typography.body2,
@@ -21,16 +23,27 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundPosition: 'center',
 }))
 
-export default function ProductsGrid ({ category, products, chooseFilter, filter, chooseCategory, tagsName: tags }) {
-  return (<>
+const style = {
+  "& label.Mui-focused": {
+    color: "darkgreen"
+  },
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: "black"
+    }
+  }
+}
+
+export default function ProductsGrid({ category, products, chooseFilter, filter, chooseCategory, tagsName: tags }) {
+
+  return (
+    <>
       <Box sx={{
-        margin: '0% 3% 0% 3%', padding: '5% 3% 0% 3%', backgroundColor: '#ffffffcc'
+        margin: '0% 3% 0% 3%', padding: '7% 3% 0% 3%', backgroundColor: 'rgba(251,235,216,0.75)'
       }}>
         <Grid container spacing={5}>
-          <Grid xs={3} sx={{
-            backgroundColor: '#ffffffcc'
-          }}>
-            <FormControl key={'asd'} fullWidth>
+          <Grid xs={3} sx={{ backgroundColor: '#ffffffcc' }} >
+            <FormControl key={'asd'} fullWidth sx={style}>
               <InputLabel id="asd">Filter By: </InputLabel>
               <Select
                 labelId="asd"
@@ -39,26 +52,27 @@ export default function ProductsGrid ({ category, products, chooseFilter, filter
                 label="filter-by"
                 onChange={chooseFilter}
               >
-                <MenuItem value={'name/'}>Name</MenuItem>
-                <MenuItem value={'category/'}>Category</MenuItem>
+                <MenuItem value={'/name/'}>Name</MenuItem>
+                <MenuItem value={'/category/'}>Category</MenuItem>
               </Select>
             </FormControl>
           </Grid>
-          <Grid xs={9} sx={{
-            backgroundColor: '#ffffffcc'
-          }}>
-            {filter === 'category/' ? <FormControl fullWidth>
+          <Grid xs={9} sx={{ backgroundColor: '#ffffffcc' }}>
+            {filter === '/category/' ? <FormControl fullWidth sx={style} variant="outlined">
               <InputLabel id="dsa">Choose category</InputLabel>
               <Select
-                labelId="dsa"
-                id="dsa"
                 value={category}
-                label="filter"
+                label="Choose category"
                 onChange={chooseCategory}
               >{tags && tags.map((tag) => (<MenuItem key={tag.name} value={tag.endpoint}>{tag.name}</MenuItem>))}
               </Select>
-            </FormControl> : filter === 'name/' ? <TextField fullWidth type="text" id="input"
-                                                             onChange={chooseCategory}></TextField> : <></>}
+            </FormControl> : filter === '/name/' ?
+              <TextField fullWidth type="text"
+                sx={style}
+                label="Type products name..."
+                id="input"
+                onChange={chooseCategory}>
+              </TextField> : <></>}
           </Grid>
 
           {products && products.map((product) => (<Grid key={product.id} xs={4} md={3}>
@@ -88,10 +102,11 @@ export default function ProductsGrid ({ category, products, chooseFilter, filter
                       Price: {product.price}
                     </Typography></Box>
 
-                </Link>
-              </Item>
-            </Grid>))}
+              </Link>
+            </Item>
+          </Grid>))}
         </Grid>
       </Box>
-    </>)
+    </>
+  )
 }

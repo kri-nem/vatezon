@@ -12,7 +12,6 @@ import java.util.Set;
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Long> {
 
-  @Override
   List<Product> findAll();
 
   List<Product> findProductByNameContaining(String name);

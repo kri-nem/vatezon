@@ -18,10 +18,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,7 +77,7 @@ public class ProductService {
     private Product buildProduct(NewProductDTO newProduct, String userName, String fileName) {
         User uploader = userDao.findByUserName(userName);
         Set<Tag> tags = mapTagNamesToTags(newProduct);
-        return Product.builder()
+        Product test = Product.builder()
                 .name(newProduct.name())
                 .description(newProduct.description())
                 .price(new BigDecimal(newProduct.price()))
@@ -88,7 +85,21 @@ public class ProductService {
                 .tags(tags)
                 .picture(fileName)
                 .build();
+
+        tags.forEach(tag -> tag.getProducts().add(test));
+        return test;
     }
+
+//    private Set<Tag> mapTagNamesToTags(NewProductDTO newProduct) {
+//        Set<Tag> result = new HashSet<>();
+//
+//        for(String tag : newProduct.tags()) {
+//            Tag tagByName = tagDAO.findByName(tag);
+//            result.add(tagByName);
+//        }
+//
+//        return result;
+//    }
 
     private Set<Tag> mapTagNamesToTags(NewProductDTO newProduct) {
         return newProduct.tags().stream()

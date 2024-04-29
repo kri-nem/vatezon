@@ -35,11 +35,8 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @RequestMapping(
-            method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public @ResponseBody boolean addNewProduct (
-            @RequestHeader("Authorization") String authHeader,
-            @ModelAttribute NewProductDTO newProduct) throws IOException {
+    @RequestMapping(method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public @ResponseBody boolean addNewProduct (@RequestHeader("Authorization") String authHeader, @ModelAttribute NewProductDTO newProduct) throws IOException {
         return productService.addNewProduct(authHeader, newProduct);
     }
 
