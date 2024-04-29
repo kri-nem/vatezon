@@ -33,7 +33,7 @@ The only things You need to have are Docker with Compose installed on your syste
 ### Installing & Running
 Clone the repo and open a terminal in the project's root folder. First, you need to have some variables set with proper values. For demo porpuses using default values on used docker images use the following:
 ```sh
-expert DB_HOST=postgres
+export DB_HOST=postgres
 export DB_PORT=5432
 export DB_NAME=postgres
 export DB_USER=postgres
