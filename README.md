@@ -12,7 +12,7 @@ Vatezon is a full-stack web-shop application, using Spring Boot and Postgres for
 
 In Vatezon you can browse and filter listed products. After registration, you can upload a new product with a new picture. Planned features include buying products and an auction system.
 
-Our team [fulopco](https://github.com/fulopco), [gyenesboti](https://github.com/gyenesboti) and [kri-nem](https://github.com/kri-nem) built this project as the last project of @github/CodecoolGlobal 's 10 month long full-time full-stack course.
+Our team [fulopco](https://github.com/fulopco), [gyenesboti](https://github.com/gyenesboti) and [kri-nem](https://github.com/kri-nem) built this project as the last project of [Codecool](https://github.com/CodecoolGlobal)'s 10 month full-time full-stack course.
 
 ### Built With
 * [![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.org/)
